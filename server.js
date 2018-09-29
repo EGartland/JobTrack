@@ -2,13 +2,20 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
-
+const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.use(express.static('public'));
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/jobsdb";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
+
+
+app.use(express.static('client/public'));
 
 app.use(logger('dev'));
 
