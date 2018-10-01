@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
-  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -12,8 +11,8 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-	"heroku-postbuild": "npm run build",
-	"test": "mocha"
+    "heroku-postbuild": "npm run build",
+    "test": "mocha"
   },
   "devDependencies": {
     "chai": "^4.2.0",
