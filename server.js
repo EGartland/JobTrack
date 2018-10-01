@@ -22,6 +22,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+app.get('/api/test', (req, res) => res.send({data: 'test'}))
+
+app.get('*', (req, res) => 
+    res.sendFile('client/public/index.html')
+)
+
 app.listen(PORT, function(){
-    console.log('app listening on PORT' + PORT)
+    console.log('app listening on PORT ' + PORT)
 })
