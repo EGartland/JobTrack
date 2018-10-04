@@ -21,9 +21,11 @@ class App extends Component {
     return (
       <div className="App">
 
-          <LoginForm />
+      <Typography align='center' variant='headline'>Home Page</Typography>
 
-        <Typography variant='headline'>Home Page</Typography>
+      <LoginForm />
+
+        
 
       </div>
     );

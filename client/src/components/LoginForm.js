@@ -1,18 +1,25 @@
 import React from 'react'
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     userForm: {
         margin: '10em auto',
         width: 'max-content',
+    },
+    buttonStyle: {
+        background: 'grey',
+      
     }
+        
+    
 }
 
 class LoginForm extends React.Component {
     state = {
         name: 'Username',
-        password: 'password'
+        password: 'password',
+        status: 'Register'
 
     };
 
@@ -29,15 +36,23 @@ class LoginForm extends React.Component {
         console.log(name, password)
     }
 
+    componentDidMount() {
+        if (this.props.login) {
+            this.setState({status: 'login'}) 
+        }
+    }
+
     render() {
         const { classes } = this.props;
         return (
             <div>
-                <form onSubmit={this.onSubmit} className={classes.userForm} id='userForm' noValidate autoComplete='off'>
+     
+                <form onSubmit={this.onSubmit} className={classes.userForm} noValidate autoComplete='off'>
+                <Typography>
+                    {this.state.status}
+                </Typography>
                     <TextField
-                        id='standard-name'
                         label='Name'
-                        className='Test'
                         value={this.state.name}
                         name='name'
                         margin='normal'
@@ -46,7 +61,6 @@ class LoginForm extends React.Component {
                     <br>
                     </br>
                     <TextField
-                        id='password'
                         label='Password'
                         type='password'
                         className=''
@@ -56,7 +70,7 @@ class LoginForm extends React.Component {
                         onChange={this.handleChange}
                     />
                     <br></br>
-                    <Button type='submit'>Submit</Button>
+                    <Button className={classes.buttonStyle} type='submit'>{this.state.status}</Button>
                 </form>
             </div>
         )
