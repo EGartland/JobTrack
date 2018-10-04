@@ -9,12 +9,12 @@ import API from './utils/API'
 class App extends Component {
 
   async componentDidMount() {
-    try { 
-      let results = await API.getTest()
-      console.log(results)
-    } catch(err) {
-      throw err
-    }
+    // try { 
+    //   let results = await API.getTest()
+    //   console.log(results)
+    // } catch(err) {
+    //   throw err
+    // }
   }
 
   render() {

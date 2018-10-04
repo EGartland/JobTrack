@@ -4,6 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const db = require('./models')
+const apiRoutes = require('./routes/apiRoutes')
 
 const PORT = process.env.PORT || 3001;
 
@@ -21,9 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/api/test', (req, res) => {
-    
-})
+app.use('/', apiRoutes)
 
 app.get('*', (req, res) => 
     res.sendFile('client/public/index.html')
