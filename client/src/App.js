@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import { LoginForm } from './components'
+import withRoot from './withRoot'
+import { Typography } from '@material-ui/core'
+import API from './utils/API'
+
 
 
 class App extends Component {
+
+  async componentDidMount() {
+    try { 
+      let results = await API.getTest()
+      console.log(results)
+    } catch(err) {
+      throw err
+    }
+  }
+
   render() {
     return (
       <div className="App">
+
           <LoginForm />
+
+        <Typography variant='headline'>Home Page</Typography>
+
       </div>
     );
   }
 }
 
-export default App;
+export default withRoot(App);
