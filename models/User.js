@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
 	niceName: {
-		type: String,
+        type: String,
+        unique: true
     },
     password: {
         type: String,
@@ -16,8 +17,6 @@ const UserSchema = new Schema({
     }
 })
 
-const User = mongoose.model('User', UserSchema)
-
 UserSchema.methods = {
     hashPass() {
         let salt = bcrypt.genSaltSync(10)
@@ -27,5 +26,7 @@ UserSchema.methods = {
         return bcrypt.compareSync(pass, this.password)
     }
 }
+
+const User = mongoose.model('User', UserSchema)
 
 module.exports = User
