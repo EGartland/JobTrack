@@ -1,9 +1,12 @@
 const db = require('../models')
+const User = require('../models/User')
 
 
 const userController = {
     async add(userObj) {
-        const user = await db.User.create(userObj)
+        const newUser = new User(userObj)
+        newUser.hashPass()
+        const user = await db.User.create(newUser)
         return user
     },
     async getAll() {
