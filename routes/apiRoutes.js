@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const userController = require('../controllers/userController')
-const User = require('../models/User')
 
 router.route('/login')
     .post((req, res) => {
@@ -15,34 +14,38 @@ router.route('/register')
         } catch(err) {
             res.end(`${err}`)
         }
-
     })
 
 router.route('/users')
-    .get((req, res) => {
-
-    })
-    .post(async (req, res) => {
-        try {
-            console.log('hello')
-            console.log(req.body)
-            res.json(await userController.add(req.body))
+    .get(async (req, res) => {
+       try {
+            res.json(await userController.getAll())
         } catch(err) {
-            // throw err
             res.end(`${err}`)
         }
-
     })
 
 router.route('/user/:id')
-    .get((req, res) => {
-        userController.getOne(req.params.id)
+    .get(async (req, res) => {
+        try {
+            res.json(await userController.getOne(req.params.id))
+        } catch(err) {
+            res.end(`${err}`)
+        }
     })
-    .put((req, res) => {
-        userController.update(req.params.id, req.body)
+    .put(async (req, res) => {
+        try {
+            res.json(await userController.update(req.params.id, req.body))
+        } catch(err) {
+            res.end(`${err}`)
+        }
     })
-    .delete((req, res) => {
-        userController.delete(req.params.id)
+    .delete(async (req, res) => {
+        try {
+            res.json(await userController.delete(req.params.id))
+        } catch(err) {
+            res.end(`${err}`)
+        }
     })
 
 module.exports = router
