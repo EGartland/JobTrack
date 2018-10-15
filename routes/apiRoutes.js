@@ -2,13 +2,29 @@ const router = require('express').Router()
 const userController = require('../controllers/userController')
 
 router.route('/login')
-    .post((req, res) => {
-
+    .post(async (req, res) => {
+		try {
+			let status
+			let loginUser = req.body
+			console.log(loginUser)
+			let dbUser = await userController.getName(loginUser.niceName)
+			console.log(dbUser.checkPass(loginUser.password))
+			if(dbUser.checkPass(loginUser.password)) {
+				status = `User ${loginUser.niceName} authenticated.`
+				res.json(dbUser)
+			} else {
+				status = `Invalid Username or Password.`
+				res.send(status)
+			}
+			console.log(status)
+		} catch(err) {
+			res.end(`${err}`)
+		}
     })
 
 router.route('/register')
     .post(async (req, res) => {
-        try{
+        try {
             let user = await userController.add(req.body)
             res.json(user)
         } catch(err) {

@@ -11,10 +11,16 @@ const UserSchema = new Schema({
     password: {
         type: String,
     },
+	jobs: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Job'
+		}
+	],
     createdTime: {
         type: Date,
         default: Date.now()
-    }
+	},
 })
 
 UserSchema.methods = {
@@ -23,6 +29,7 @@ UserSchema.methods = {
         return this.password = bcrypt.hashSync(this.password, salt)
     },
     checkPass(pass) {
+		console.log(pass, this.password)
         return bcrypt.compareSync(pass, this.password)
     }
 }

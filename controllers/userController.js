@@ -16,7 +16,11 @@ const userController = {
     async getOne(id) {
         const user = await db.User.findById(id)
         return user
-    },
+	},
+	async getName(name) {
+		const user = await db.User.findOne({niceName: name})
+		return user
+	},
     async update(id, update) {
         const user = await db.User.findByIdAndUpdate(id, {$set: update})
         return user
