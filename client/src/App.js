@@ -9,15 +9,15 @@ import API from './utils/API'
 class App extends Component {
 	state = {
 		user: {},
-		type: 'login'
+		auth: false
 	}
 
   async componentDidMount() {
-	  
+
   }
 
-  setUser(user) {
-	  this.setState({ user })
+  setUser = (user) => {
+	  this.setState({ user, auth: true })
   }
 
   render() {
@@ -26,8 +26,8 @@ class App extends Component {
 
 		<Typography align='center' variant='headline'>Home Page</Typography>
 
-		{!this.state.user.name && this.state.type === 'register' && <LoginForm setUser={this.setUser} />}
-		{!this.state.user.name && this.state.type === 'login' && <LoginForm setUser={this.setUser} login/>}
+		{!this.state.user.name && !this.state.auth && <LoginForm setUser={this.setUser}/>}
+		{this.state.auth && <p>Welcome {this.state.user.niceName}</p>}
 
       </div>
     );
