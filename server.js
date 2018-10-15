@@ -20,7 +20,7 @@ app.use(express.static('client/public'));
 app.use(logger('dev'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', apiRoutes)
 

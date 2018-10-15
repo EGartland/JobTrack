@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import API from '../utils/API'
 
 const styles = {
     userForm: {
@@ -17,10 +18,10 @@ const styles = {
 
 class LoginForm extends React.Component {
     state = {
-        name: 'Username',
-        password: 'password',
-        status: 'Register'
-
+        name: '',
+        password: '',
+		status: 'Register',
+		text: 'Already a member? '
     };
 
     handleChange = (e) => {
@@ -30,15 +31,21 @@ class LoginForm extends React.Component {
         })
     }
 
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
         const { name, password } = this.state
-        console.log(name, password)
+		console.log(name, password)
+		if(this.props.login) {
+			let user = await API.login(name, password)
+			user ? this.props.setUser(user) : null
+		} else {
+			API.register(name, password)
+		}
     }
 
     componentDidMount() {
         if (this.props.login) {
-            this.setState({status: 'login'}) 
+            this.setState({status: 'Login'}) 
         }
     }
 
@@ -71,6 +78,7 @@ class LoginForm extends React.Component {
                     />
                     <br></br>
                     <Button className={classes.buttonStyle} type='submit'>{this.state.status}</Button>
+					{this.state.status === 'Register' && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.status}</a></p>}
                 </form>
             </div>
         )

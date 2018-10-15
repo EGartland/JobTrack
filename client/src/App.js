@@ -7,25 +7,27 @@ import API from './utils/API'
 
 
 class App extends Component {
+	state = {
+		user: {},
+		type: 'login'
+	}
 
   async componentDidMount() {
-    // try { 
-    //   let results = await API.getTest()
-    //   console.log(results)
-    // } catch(err) {
-    //   throw err
-    // }
+	  
+  }
+
+  setUser(user) {
+	  this.setState({ user })
   }
 
   render() {
     return (
       <div className="App">
 
-      <Typography align='center' variant='headline'>Home Page</Typography>
+		<Typography align='center' variant='headline'>Home Page</Typography>
 
-      <LoginForm />
-
-        
+		{!this.state.user.name && this.state.type === 'register' && <LoginForm setUser={this.setUser} />}
+		{!this.state.user.name && this.state.type === 'login' && <LoginForm setUser={this.setUser} login/>}
 
       </div>
     );
