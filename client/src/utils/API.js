@@ -11,7 +11,7 @@ const API = {
 	},
 	async register(name, pass) {
 		try {
-			let { data } = await axios.post('/api/register', { niceName: name, password: pass})
+			let { data } = await axios.post('/register', { niceName: name, password: pass})
 			return data
 		} catch(err) {
 			throw err
@@ -19,7 +19,8 @@ const API = {
 	},
 	async login(name, pass) {
 		try {
-			let { data } = await axios.post('/api/login', { niceName: name, password: pass})
+			let { data } = await axios.post('/login', { niceName: name, password: pass})
+			return data
 		} catch(err) {
 			throw err
 		}

@@ -21,7 +21,8 @@ class LoginForm extends React.Component {
         name: '',
         password: '',
 		status: 'Register',
-		text: 'Already a member? '
+		text: 'Already a member? ',
+		other: 'Login'
     };
 
     handleChange = (e) => {
@@ -35,13 +36,21 @@ class LoginForm extends React.Component {
         e.preventDefault();
         const { name, password } = this.state
 		console.log(name, password)
-		if(this.props.login) {
+		if(this.state.status === 'Login') {
 			let user = await API.login(name, password)
+			console.log(user)
 			user ? this.props.setUser(user) : null
 		} else {
 			API.register(name, password)
+			this.changeForm()
 		}
-    }
+	}
+	
+	changeForm = () => {
+		this.state.status === 'Register' ? 
+		this.setState({status: 'Login', text: 'New here? ', other: 'Register'}) :
+		this.setState({status: 'Register', text: 'Already a member? ', other: 'Login'})
+	}
 
     componentDidMount() {
         if (this.props.login) {
@@ -78,7 +87,7 @@ class LoginForm extends React.Component {
                     />
                     <br></br>
                     <Button className={classes.buttonStyle} type='submit'>{this.state.status}</Button>
-					{this.state.status === 'Register' && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.status}</a></p>}
+					{this.state.status && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.other}</a></p>}
                 </form>
             </div>
         )
