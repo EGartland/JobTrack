@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { LoginForm } from './components'
 import withRoot from './withRoot'
 import { Typography } from '@material-ui/core'
-import API from './utils/API'
+import API from './utils/API';
+import Dashboard from './components/Dashboard/Dashboard'
 
 
 
@@ -27,7 +28,7 @@ class App extends Component {
 		<Typography align='center' variant='headline'>Home Page</Typography>
 
 		{!this.state.user.name && !this.state.auth && <LoginForm setUser={this.setUser}/>}
-		{this.state.auth && <p>Welcome {this.state.user.niceName}</p>}
+		{this.state.auth && < Dashboard />}
 
       </div>
     );
