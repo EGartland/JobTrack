@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const userController = require('../controllers/userController')
+const jobController = require('../controllers/jobController')
 
 router.route('/login')
     .post(async (req, res) => {
-		try {
+		try { // This is what verifies our user
 			let status
 			let loginUser = req.body
 			console.log(loginUser)
@@ -62,6 +63,42 @@ router.route('/user/:id')
         } catch(err) {
             res.end(`${err}`)
         }
-    })
+	})
+	
+router.route('/job')
+	.post(async (req, res) => {
+		const { id, jobDetails } = req.body
+		try {
+			res.json(await jobController.add(id, jobDetails))
+		} catch(err) {
+			throw err
+		}
+	})
+router.route('/job/:id')
+	.post(async (req, res) => {
+		const { id, jobDetails } = req.body
+		try {
+			res.json(await jobController.add(id, jobDetails))
+		} catch(err) {
+			throw err
+		}
+	})
+	.delete(async (req, res) => {
+		const { id } = req.params
+		try {
+			res.json(await jobController.delete(id))
+		} catch(err) {
+			throw err
+		}
+	})
+	.put(async (req, res) => {
+		const { uid, update } = req.body
+		const { id } = req.params
+		try {
+			res.json(await jobController.update(id, update))
+		} catch (err) {
+			throw err
+		}
+	})
 
 module.exports = router

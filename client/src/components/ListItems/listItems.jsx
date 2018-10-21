@@ -13,40 +13,41 @@ import FolderIcon from '@material-ui/icons/Folder';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ShareIcon from '@material-ui/icons/Share';
 import AttachmentIcon from '@material-ui/icons/Attachment';
+import { Link } from 'react-router-dom'
 
 export const mainListItems = (
   <div>
-    <ListItem button component="a" href="#">
+    <ListItem button component='a' href="/">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="/addJob">
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
       <ListItemText primary="Add a Job" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="/jobs">
       <ListItemIcon>
         <MenuIcon />
       </ListItemIcon>
       <ListItemText primary="Applications" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="#">
       <ListItemIcon>
         <ChatIcon />
       </ListItemIcon>
       <ListItemText primary="Interviews" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="#">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Contacts" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="#">
       <ListItemIcon>
         <CalendarTodayIcon />
       </ListItemIcon>

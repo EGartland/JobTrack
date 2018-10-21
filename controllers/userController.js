@@ -14,7 +14,7 @@ const userController = {
         return users
     },
     async getOne(id) {
-        const user = await db.User.findById(id)
+        const user = await db.User.findById(id).populate('job')
         return user
 	},
 	async getName(name) {
