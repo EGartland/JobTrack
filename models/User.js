@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     password: {
         type: String,
     },
-	jobs: [
+	job: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'Job'

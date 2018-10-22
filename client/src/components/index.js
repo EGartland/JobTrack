@@ -1,1 +1,6 @@
 export { default as LoginForm} from './LoginForm'
+export { default as Home} from './Home'
+export { default as Jobs} from './Jobs'
+export { default as JobForm} from './JobForm'
+export { default as NoMatch} from './NoMatch'
+export { default as Calendar} from './Calendar'

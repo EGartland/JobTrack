@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { LoginForm } from './components'
 import withRoot from './withRoot'
 import { Typography } from '@material-ui/core'
-import API from './utils/API';
+// import API from './utils/API';
 import Dashboard from './components/Dashboard/Dashboard'
-
 
 
 class App extends Component {
@@ -19,6 +18,7 @@ class App extends Component {
 
   setUser = (user) => {
 	  this.setState({ user, auth: true })
+	//   console.log(this.state.user)
   }
 
   render() {
@@ -27,8 +27,8 @@ class App extends Component {
 
 		<Typography align='center' variant='headline'>Home Page</Typography>
 
-		{!this.state.user.name && !this.state.auth && <LoginForm setUser={this.setUser}/>}
-		{this.state.auth && < Dashboard />}
+		{!this.state.user.name && !this.state.auth && <LoginForm login setUser={this.setUser}/>}
+		{this.state.auth && this.state.user.niceName && < Dashboard user={this.state.user} />}
 
       </div>
     );
