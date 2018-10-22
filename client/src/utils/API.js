@@ -1,17 +1,9 @@
 import axios from 'axios'
 
 const API = {
-    async getTest() {
-        try {
-            let { data } = await axios.get('/api/test',)
-            return data
-        } catch(err) {
-            throw err
-        }
-	},
-	async register(name, pass) {
+	async register(name, pass, links) {
 		try {
-			let { data } = await axios.post('/register', { niceName: name, password: pass})
+			let { data } = await axios.post('/register', { niceName: name, password: pass, links})
 			return data
 		} catch(err) {
 			throw err
@@ -40,7 +32,31 @@ const API = {
 		} catch (err) {
 			throw err	
 		}
-	}
+	},
+	async getJob(id) {
+		try {
+			let { data } = await axios.get(`/job/${id}`)
+			return data
+		} catch (err) {
+			throw err	
+		}
+	},
+	async updateJob(id, update) {
+		try {
+			let { data } = await axios.put(`/job/${id}`, update)
+			return data
+		} catch (err) {
+			throw err	
+		}
+	},
+	async addJob(uid, jobDetails) {
+		try {
+			let { data } = await axios.post(`/job`, {uid, jobDetails})
+			return data
+		} catch (err) {
+			throw err	
+		}
+	},
 }
 
 export default API

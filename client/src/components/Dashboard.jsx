@@ -14,10 +14,8 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../ListItems/listItems.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
-import { Home, Jobs, JobForm } from '../'
+import { Home, Jobs, JobForm, Calendar, Interviews, Contact, LinksList, NavList } from '.'
 
 const drawerWidth = 240;
 
@@ -132,14 +130,11 @@ class Dashboard extends React.Component {
 				<div>
 					<CssBaseline />
 					<div className={classes.root}>
-						<AppBar
-							position="absolute"
+						<AppBar position="absolute"
 							className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
 						>
 							<Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-								<IconButton
-									color="inherit"
-									aria-label="Open drawer"
+								<IconButton color="inherit" aria-label="Open drawer"
 									onClick={this.handleDrawerOpen}
 									className={classNames(
 										classes.menuButton,
@@ -148,13 +143,7 @@ class Dashboard extends React.Component {
 								>
 									<MenuIcon />
 								</IconButton>
-								<Typography
-									component="h1"
-									variant="display1"
-									color="inherit"
-									noWrap
-									className={classes.title}
-								>
+								<Typography component="h1" variant="display2" color="inherit" noWrap className={classes.title} >
 									Job Track
               					</Typography>
 								<IconButton color="inherit">
@@ -172,50 +161,31 @@ class Dashboard extends React.Component {
 							open={this.state.open}
 						>
 							<div className={classes.toolbarIcon}>
-								<IconButton onClick={this.handleDrawerClose}>
+								{this.state.open && <IconButton onClick={this.handleDrawerClose}>
 									<ChevronLeftIcon />
-								</IconButton>
+								</IconButton>}
 							</div>
 							<Divider />
-							<List>{mainListItems}</List>
-							<Divider />
-							<List>{secondaryListItems}</List>
+							{this.props.user.niceName && 
+								<div>
+									<List>
+										<NavList />
+									</List>
+									<Divider />
+									<List>
+										<LinksList />
+									</List>
+								</div>
+								}
 						</Drawer>
 						<main className={classes.content}>
-
 							<Route exact path='/' component={Home} />
+							<Route exact path='/job/:id' component={JobForm} />
 							<Route exact path='/addJob' component={JobForm} />
 							<Route exact path='/jobs' component={() => <Jobs uid={this.props.user._id} />} />
-							<Route exact path='/calender' component={Jobs} />
-							<Route exact path='/contacts' component={Jobs} />
-							<Route exact path='/interviews' component={Jobs} />
-
-							{/* <div className={classes.heroUnit}>
-								<div className={classes.heroContent}>
-									<Typography variant="h2" align="center" color="textPrimary" gutterBottom>
-										Job Track
-            						</Typography>
-									<Typography variant="h6" align="center" color="textSecondary" paragraph>
-										Something short and leading about the collection below—its contents, the creator, etc.
-										Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-										entirely.
-            						</Typography>
-									<div className={classes.heroButtons}>
-										<Grid container spacing={16} justify="center">
-											<Grid item>
-												<Button variant="contained" color="primary">
-													Create Account
-                  								</Button>
-											</Grid>
-											<Grid item>
-												<Button variant="outlined" color="primary">
-													Login to Existing Account
-                  								</Button>
-											</Grid>
-										</Grid>
-									</div>
-								</div>
-							</div> */}
+							<Route exact path='/calendar' component={Calendar} />
+							<Route exact path='/contacts' component={Contact} />
+							<Route exact path='/interviews' component={Interviews} />
 						</main>
 					</div>
 				</div>
@@ -229,3 +199,31 @@ Dashboard.propTypes = {
 };
 
 export default withStyles(styles)(Dashboard);
+
+
+{/* <div className={classes.heroUnit}>
+	<div className={classes.heroContent}>
+		<Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+			Job Track
+		</Typography>
+		<Typography variant="h6" align="center" color="textSecondary" paragraph>
+			Something short and leading about the collection below—its contents, the creator, etc.
+			Make it short and sweet, but not too short so folks don&apos;t simply skip over it
+			entirely.
+		</Typography>
+		<div className={classes.heroButtons}>
+			<Grid container spacing={16} justify="center">
+				<Grid item>
+					<Button variant="contained" color="primary">
+						Create Account
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button variant="outlined" color="primary">
+						Login to Existing Account
+					</Button>
+				</Grid>
+			</Grid>
+		</div>
+	</div>
+</div> */}

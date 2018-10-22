@@ -2,12 +2,14 @@ const db = require('../models')
 
 const jobController = {
     async add(uid, jobDetails) {
-		const job = await db.Job.create(jobDetails)
-		console.log(uid, job._id)
-		// console.log(uid)
-		const user = await db.User.findOneAndUpdate(uid, {$push: { job: job._id}}, { new: true })
-		// console.log(user) // TODO: comment this out
-        return job
+		try {
+			jobDetails.uid = uid
+			const job = await db.Job.create(jobDetails)
+			await db.User.findOneAndUpdate(uid, {$push: { job: job._id}}, { new: true })
+			return job
+		} catch(err) {
+			return err
+		}
     },
     async getAll() {
 		try {
@@ -28,12 +30,12 @@ const jobController = {
 	},
     async update(id, update) {
 		try {
-			const job = await db.Job.findByIdAndUpdate(id, {$set: update})
+			console.log('update', update)
+			const job = await db.Job.findOneAndUpdate(id, {$set: update})
         	return job
-		} catch (error) {
+		} catch (err) {
 			throw err
 		}
-       
     },
     async delete(id) {
 		try {

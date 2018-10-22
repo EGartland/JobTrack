@@ -21,6 +21,18 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now()
 	},
+	resume: {
+		type: String,
+	},
+	linkedIn: {
+		type: String,
+	},
+	gitHub: {
+		type: String,
+	},
+	portfolio: {
+		type: String,
+	},
 })
 
 UserSchema.methods = {

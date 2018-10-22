@@ -16,7 +16,6 @@ router.route('/login')
 				status = `Invalid Username or Password.`
 				res.json({auth: false, status})
 			}
-			console.log(status)
 		} catch(err) {
 			res.end(`${err}`)
 		}
@@ -25,7 +24,9 @@ router.route('/login')
 router.route('/register')
     .post(async (req, res) => {
         try {
-            let user = await userController.add(req.body)
+			let {niceName, password, links } = req.body
+			let [resume, linkedIn, gitHub, portfolio] = links
+            let user = await userController.add({niceName, password, resume, linkedIn, gitHub, portfolio})
             res.json(user)
         } catch(err) {
             res.end(`${err}`)
@@ -83,21 +84,19 @@ router.route('/job/:id')
 		}
 	})	
 	.put(async (req, res) => {
-		const { uid, update } = req.body
+		const update = req.body
 		try {
-			res.json(await jobController.update(uid, update))
+			res.json(await jobController.update(req.params.id, update))
 		} catch (err) {
 			throw err
 		}
 	})
 	.delete(async (req, res) => {
-		const { uid } = req.body
 		const { id } = req.params
 		try {
 			res.json(await jobController.delete(id))
 		} catch (err) {
-			throw err
-			
+			throw err			
 		}
 	})
 

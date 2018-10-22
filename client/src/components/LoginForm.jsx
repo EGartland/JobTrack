@@ -23,17 +23,18 @@ const styles = {
         width: 'max-content',
     },
     buttonStyle: {
-        background: 'grey',
-      
-    }
-        
-    
+        background: 'grey',     
+    }  
 }
 
 class LoginForm extends React.Component {
     state = {
         name: '',
         password: '',
+		resume: '',
+		linkedIn: '',
+		gitHub: '',
+		portfolio: '',
 		status: 'Register',
 		text: 'Already a member? ',
 		other: 'Login',
@@ -49,25 +50,38 @@ class LoginForm extends React.Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const { name, password } = this.state
+        const { name, password, resume, linkedIn, gitHub, portfolio } = this.state
 		if(this.state.status === 'Login') {
 			let data = await API.login(name, password)
 			data.auth ? this.props.setUser(data.user) : this.setState({error: data.status})
 		} else {
-			API.register(name, password)
+			let links = [resume, linkedIn, gitHub, portfolio]
+			API.register(name, password, links)
 			this.changeForm()
 		}
 	}
 	
+	resetForm = () => {
+		this.setState({
+			name: '',
+			password: '',
+			resume: '',
+			linkedIn: '',
+			gitHub: '',
+			portfolio: '',
+		})
+	}
+
 	changeForm = () => {
 		this.state.status === 'Register' ? 
 		this.setState({status: 'Login', text: 'New here? ', other: 'Register'}) :
 		this.setState({status: 'Register', text: 'Already a member? ', other: 'Login'})
+		this.resetForm()
 	}
 
     componentDidMount() {
         if (this.props.login) {
-            this.setState({status: 'Login'}) 
+            this.setState({status: 'Login', other: 'Register', text: 'New here? '}) 
         }
     }
 
@@ -75,22 +89,20 @@ class LoginForm extends React.Component {
         const { classes } = this.props;
         return (
             <div>
-     
                 <form onSubmit={this.onSubmit} className={classes.userForm} noValidate autoComplete='off'>
                 <Typography>
                     {this.state.status}
                 </Typography>
                     <TextField
-                        label='Name'
+                        label='Name *'
                         value={this.state.name}
                         name='name'
                         margin='normal'
                         onChange={this.handleChange}
                     />
-                    <br>
-                    </br>
+                    <br/>                    
                     <TextField
-                        label='Password'
+                        label='Password *'
                         type='password'
                         className=''
                         value={this.state.password}
@@ -99,8 +111,50 @@ class LoginForm extends React.Component {
 						onChange={this.handleChange}
 						autoComplete='stoof'
                     />
+					{this.state.status === 'Register' && 
+					<React.Fragment>
+						<br/>
+						<TextField
+							label='Resume'
+							type='url'
+							value={this.state.resume}
+							name='resume'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						<br/>
+						<TextField
+							label='LinkedIn'
+							type='url'
+							value={this.state.linkedIn}
+							name='linkedIn'
+							margin='normal'
+							onChange={this.handleChange}
+							
+						/>
+						<br/>
+						<TextField
+							label='GitHub'
+							type='url'
+							value={this.state.gitHub}
+							name='gitHub'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						<br/>
+						<TextField
+							label='Portfolio'
+							type='url'
+							value={this.state.portfolio}
+							name='portfolio'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						</React.Fragment>
+					}
                     <br></br>
 					<p>{this.state.error}</p>
+					<p>* indicates required field</p>
                     <Button className={classes.buttonStyle} type='submit'>{this.state.status}</Button>
 					{this.state.status && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.other}</a></p>}
                 </form>
