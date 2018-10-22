@@ -1,20 +1,20 @@
 const router = require('express').Router()
 const userController = require('../controllers/userController')
+const jobController = require('../controllers/jobController')
 
 router.route('/login')
     .post(async (req, res) => {
 		try {
 			let status
 			let loginUser = req.body
-			console.log(loginUser)
 			let dbUser = await userController.getName(loginUser.niceName)
-			console.log(dbUser.checkPass(loginUser.password))
-			if(dbUser.checkPass(loginUser.password)) {
+			if(dbUser && dbUser.checkPass(loginUser.password)) {
 				status = `User ${loginUser.niceName} authenticated.`
-				res.json(dbUser)
+				let user = await userController.getOne(dbUser._id)
+				res.json({auth: true, status, user})
 			} else {
 				status = `Invalid Username or Password.`
-				res.send(status)
+				res.json({auth: false, status})
 			}
 			console.log(status)
 		} catch(err) {
@@ -62,6 +62,43 @@ router.route('/user/:id')
         } catch(err) {
             res.end(`${err}`)
         }
-    })
+	})
+	
+router.route('/job')
+	.post(async (req, res) => {
+		const { uid, jobDetails } = req.body
+		try {
+			res.json(await jobController.add(uid, jobDetails))
+		} catch (err) {
+			throw err
+		}
+	})
+
+router.route('/job/:id')
+	.get(async (req, res) => {
+		try {
+			res.json(await jobController.getOne(req.params.id))
+		} catch (err) {
+			throw err
+		}
+	})	
+	.put(async (req, res) => {
+		const { uid, update } = req.body
+		try {
+			res.json(await jobController.update(uid, update))
+		} catch (err) {
+			throw err
+		}
+	})
+	.delete(async (req, res) => {
+		const { uid } = req.body
+		const { id } = req.params
+		try {
+			res.json(await jobController.delete(id))
+		} catch (err) {
+			throw err
+			
+		}
+	})
 
 module.exports = router

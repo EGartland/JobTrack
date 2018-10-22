@@ -17,7 +17,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../ListItems/listItems.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import { Home, Jobs, JobForm } from '../'
+import { Home, Jobs, JobForm, Calendar } from '../'
 
 const drawerWidth = 240;
 
@@ -114,6 +114,7 @@ const styles = theme => ({
 class Dashboard extends React.Component {
 	state = {
 		open: true,
+		user: {},
 	};
 
 	handleDrawerOpen = () => {
@@ -124,9 +125,13 @@ class Dashboard extends React.Component {
 		this.setState({ open: false });
 	};
 
+	componentDidMount() {
+		console.log(this.props.user)
+		this.setState({user: this.props.user})
+	}
+
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<Router>
 				<div>
@@ -184,11 +189,12 @@ class Dashboard extends React.Component {
 						<main className={classes.content}>
 
 							<Route exact path='/' component={Home} />
-							<Route exact path='/addJob' component={JobForm} />
+							{console.log(this.props.user)}
+							<Route exact path='/addJob' component={() => <JobForm user={this.props.user._id} /> } />
 							<Route exact path='/jobs' component={() => <Jobs uid={this.props.user._id} />} />
-							<Route exact path='/calender' component={Jobs} />
-							<Route exact path='/contacts' component={Jobs} />
-							<Route exact path='/interviews' component={Jobs} />
+							<Route exact path='/calender' component={Calendar} />
+							{/* <Route exact path='/contacts' component={Jobs} />
+							<Route exact path='/interviews' component={Jobs} /> */}
 
 							{/* <div className={classes.heroUnit}>
 								<div className={classes.heroContent}>

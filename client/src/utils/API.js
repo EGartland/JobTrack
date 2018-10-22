@@ -24,6 +24,22 @@ const API = {
 		} catch(err) {
 			throw err
 		}
+	},
+	async deleteJob(id) {
+		try {
+			let { data } = await axios.delete(`/job/${id}`)
+			return data
+		} catch (err) {
+			throw err
+		}
+	},
+	async getUser(id) {
+		try {
+			let { data } = await axios.get(`/user/${id}`)
+			return data
+		} catch (err) {
+			throw err	
+		}
 	}
 }
 

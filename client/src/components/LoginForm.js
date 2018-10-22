@@ -36,7 +36,8 @@ class LoginForm extends React.Component {
         password: '',
 		status: 'Register',
 		text: 'Already a member? ',
-		other: 'Login'
+		other: 'Login',
+		error: ''
     };
 
     handleChange = (e) => {
@@ -49,11 +50,9 @@ class LoginForm extends React.Component {
     onSubmit = async (e) => {
         e.preventDefault();
         const { name, password } = this.state
-		console.log(name, password)
 		if(this.state.status === 'Login') {
-			let user = await API.login(name, password)
-			console.log(user)
-			user ? this.props.setUser(user) : null
+			let data = await API.login(name, password)
+			data.auth ? this.props.setUser(data.user) : this.setState({error: data.status})
 		} else {
 			API.register(name, password)
 			this.changeForm()
@@ -97,9 +96,11 @@ class LoginForm extends React.Component {
                         value={this.state.password}
                         name= 'password'
                         margin='normal'
-                        onChange={this.handleChange}
+						onChange={this.handleChange}
+						autoComplete='stoof'
                     />
                     <br></br>
+					<p>{this.state.error}</p>
                     <Button className={classes.buttonStyle} type='submit'>{this.state.status}</Button>
 					{this.state.status && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.other}</a></p>}
                 </form>
