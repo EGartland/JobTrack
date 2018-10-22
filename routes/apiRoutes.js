@@ -69,6 +69,7 @@ router.route('/job')
 	.post(async (req, res) => {
 		const { uid, jobDetails } = req.body
 		try {
+			console.log(uid, jobDetails)
 			res.json(await jobController.add(uid, jobDetails))
 		} catch (err) {
 			throw err

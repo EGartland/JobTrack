@@ -22,7 +22,7 @@ const userController = {
 		return user
 	},
     async update(id, update) {
-        const user = await db.User.findByIdAndUpdate(id, {$set: update})
+        const user = await db.User.findOneAndUpdate({_id: id}, {$set: update})
         return user
     },
     async delete(id) {

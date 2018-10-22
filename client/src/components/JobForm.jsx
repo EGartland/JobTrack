@@ -38,7 +38,7 @@ class JobForm extends React.Component {
 
 	reset = () => {
 		let user = JSON.parse(sessionStorage.getItem('user'))
-		// console.log(user._id)
+		console.log(user._id)
 		this.setState({
 			uid: user._id,
 			update: false,
@@ -168,6 +168,7 @@ class JobForm extends React.Component {
 							<MenuItem value='Interviewed'>Interviewed</MenuItem>
 							<MenuItem value='Follow Up'>Follow-Up</MenuItem>
 							<MenuItem value='Letter Sent'>Thank-You letter sent</MenuItem>
+							<MenuItem value='Accepted'>Accepted</MenuItem>
 						</Select>
 					</FormControl>
 					<br />

@@ -5,7 +5,9 @@ const jobController = {
 		try {
 			jobDetails.uid = uid
 			const job = await db.Job.create(jobDetails)
-			await db.User.findOneAndUpdate(uid, {$push: { job: job._id}}, { new: true })
+			console.log(job.uid)
+			const user = await db.User.findOneAndUpdate({_id: uid}, {$push: { job: job._id}}, { new: true })
+			console.log(user)
 			return job
 		} catch(err) {
 			return err
@@ -31,7 +33,7 @@ const jobController = {
     async update(id, update) {
 		try {
 			console.log('update', update)
-			const job = await db.Job.findOneAndUpdate(id, {$set: update})
+			const job = await db.Job.findOneAndUpdate({_id: id}, {$set: update})
         	return job
 		} catch (err) {
 			throw err
