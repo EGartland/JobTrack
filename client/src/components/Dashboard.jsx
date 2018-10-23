@@ -122,6 +122,10 @@ class Dashboard extends React.Component {
 		this.setState({ open: false });
 	};
 
+	logout = () => {
+		this.props.logout()
+	}
+
 	render() {
 		const { classes } = this.props;
 
@@ -148,7 +152,7 @@ class Dashboard extends React.Component {
               					</Typography>
 								<IconButton color="inherit">
 									<Badge badgeContent={4} color="secondary">
-										<NotificationsIcon />
+										<NotificationsIcon onClick={this.logout} />
 									</Badge>
 								</IconButton>
 							</Toolbar>

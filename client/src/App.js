@@ -19,12 +19,21 @@ class App extends Component {
 	  sessionStorage.setItem('user', JSON.stringify(user))
   }
 
+  handleLogout = () => {
+	this.setState({
+		user: {},
+		auth: false
+	})
+	if(sessionStorage.getItem('user')) sessionStorage.removeItem('user')
+  }
+
+
   render() {
     return (
       <div className="App">
-		<Typography align='center' variant='headline'>Home Page</Typography>
+		<Typography align='center' variant='headline'>Job Track</Typography>
 		{!this.state.user.name && !this.state.auth && <LoginForm login setUser={this.setUser}/>}
-		{this.state.auth && this.state.user.niceName && < Dashboard user={this.state.user} />}
+		{this.state.auth && this.state.user.niceName && < Dashboard logout={this.handleLogout} user={this.state.user} />}
       </div>
     );
   }
