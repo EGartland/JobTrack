@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const JobSchema = new Schema({
-	uid: [{ //User that created this job
+	uid: { //User that created this job
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		// required: true
-	}],
+	},
 	jobTitle: {
 		type: String,
 		required: true,

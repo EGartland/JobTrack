@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 
 class Home extends Component {
 	state = {
-		user: {}
+		user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : {}
 	}
 	componentDidMount() {
-		if(sessionStorage.getItem('user')) this.setState({ user: JSON.parse(sessionStorage.getItem('user')) })
 	}
 
 	render() {
