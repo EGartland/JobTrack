@@ -19,7 +19,7 @@ router.route('/login')
 		} catch(err) {
 			res.end(`${err}`)
 		}
-    })
+	})
 
 router.route('/register')
     .post(async (req, res) => {
