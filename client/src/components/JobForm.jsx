@@ -1,7 +1,15 @@
 import React from 'react'
 import { TextField, Button, FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Select, Input, MenuItem, InputLabel } from '@material-ui/core'
-import API from '../utils/API'
+import API from '../utils/API';
 import { isNull } from 'util';
+import { withStyles } from '@material-ui/core/styles';
+import '../styles/jobForm.css'
+
+const styles = {
+	body: {
+		width: '58%',
+	},
+}
 
 class JobForm extends React.Component {
 
@@ -129,9 +137,9 @@ class JobForm extends React.Component {
 	render() {
 		// console.log(this.state)
 		return (
-			<div>
+			<div class='container'>
 				<p>{this.state.title}</p>
-				<form onSubmit={this.onSubmit}>
+				<form className='jobContainer' onSubmit={this.onSubmit}>
 					<TextField
 						label='Job Title *'
 						value={this.state.jobTitle}
@@ -139,6 +147,8 @@ class JobForm extends React.Component {
 						margin='normal'
 						onChange={this.handleChange}
 						error={this.state.jobTitleErr || this.state.jobTitle.length < 3}
+						fullWidth={true}
+						
 					/>
 					<br/>
 					<TextField
@@ -148,7 +158,53 @@ class JobForm extends React.Component {
 						margin='normal'
 						onChange={this.handleChange}
 						error={this.state.companyNameErr || this.state.jobTitle.length < 3}
+						fullWidth={true}
 					/>
+					<br />
+					<br />
+{/* 				
+					<TextField // change this to select for Boolean
+						// label='Interview'
+						value={this.state.interview}
+						name='interview'
+						margin='normal'
+						onChange={this.handleChange}
+						type='radio'
+					/> */}
+					<br />
+					<TextField
+						label='Contact Phone'
+						value={this.state.phone}
+						name='phone'
+						margin='normal'
+						onChange={this.handleChange}
+						id="phone"
+						type='tel'
+						fullWidth={true}
+					/>
+					<br/>
+					<TextField
+						label='Contact Email'
+						value={this.state.email}
+						name='email'
+						margin='normal'
+						onChange={this.handleChange}
+						type='email'
+						fullWidth={true}
+					/>
+					<br />
+					<TextField
+						// label='Applied Date'
+						value={this.state.appliedDate}
+						name='appliedDate'
+						margin='normal'
+						onChange={this.handleChange}
+						type='date'
+						max={new Date().toISOString().substring(0, 9)}
+						fullWidth={true}
+					/>
+					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
+					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}
 					<br />
 					<br />
 					<FormControl>
@@ -199,52 +255,12 @@ class JobForm extends React.Component {
 							/>
 						</RadioGroup>
 					</FormControl>
-					<TextField // change this to select for Boolean
-						// label='Interview'
-						value={this.state.interview}
-						name='interview'
-						margin='normal'
-						onChange={this.handleChange}
-						type='radio'
-					/>
-					<br />
-					<TextField
-						label='Contact Phone'
-						value={this.state.phone}
-						name='phone'
-						margin='normal'
-						onChange={this.handleChange}
-						id="phone"
-						type='tel'
-					/>
-					<br/>
-					<TextField
-						label='Contact Email'
-						value={this.state.email}
-						name='email'
-						margin='normal'
-						onChange={this.handleChange}
-						type='email'
-					/>
-					<br />
-					<TextField
-						// label='Applied Date'
-						value={this.state.appliedDate}
-						name='appliedDate'
-						margin='normal'
-						onChange={this.handleChange}
-						type='date'
-						max={new Date().toISOString().substring(0, 9)}
-					/>
-					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
-					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}
-					<br />
-					<br />
-					<Button type='submit'>{this.state.update ? 'Update' : 'Submit'}</Button>
+					<br></br>
+					<Button id='submitBtn' type='submit'>{this.state.update ? 'Update' : 'Submit'}</Button>
 				</form>
 			</div>
 		)
 	}
 }
 
-export default JobForm
+export default withStyles(styles)(JobForm)
