@@ -151,9 +151,10 @@ class Dashboard extends React.Component {
 									Job Track
               					</Typography>
 								<IconButton color="inherit">
-									<Badge badgeContent={4} color="secondary">
+									{/* <Badge badgeContent={4} color="secondary">
 										<NotificationsIcon onClick={this.logout} />
-									</Badge>
+									</Badge> */}
+									<Typography onClick={this.logout} style={{color: 'ghostwhite'}}>Logout</Typography>
 								</IconButton>
 							</Toolbar>
 						</AppBar>
