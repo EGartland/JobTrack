@@ -58,19 +58,19 @@ const styles = theme => ({
 	}
 });
 
-let id = 0;
-function createData(name, interviewNum, time, date, location, notes) {
-	id += 1;
-	return { id, name, interviewNum, time, date, location, notes };
-}
+// let id = 0;
+// function createData(name, interviewNum, time, date, location, notes) {
+// 	id += 1;
+// 	return { id, name, interviewNum, time, date, location, notes };
+// }
 
-const rows = [
-	createData('Cerner', 2, '3:45PM', '10/29', 'NKC', 'Bring MacBook'),
-	createData('Saint Lukes', 1, '10:00AM', '11/03', 'Plaza', 'Dr. Jones refferal'),
-	createData('Google Fiber', 0, '12:00PM', '10/30', 'Discord', 'Add contact for remote interview'),
-	createData('Trilogy', 0, '2:00PM', '11/07', 'Overland Park', 'Phone Interview'),
-	createData('Sprint', 1, '1:45PM', '11/10', 'Leawood', '2nd Floor, Suite #211'),
-];
+// const rows = [
+// 	createData('Cerner', 2, '3:45PM', '10/29', 'NKC', 'Bring MacBook'),
+// 	createData('Saint Lukes', 1, '10:00AM', '11/03', 'Plaza', 'Dr. Jones refferal'),
+// 	createData('Google Fiber', 0, '12:00PM', '10/30', 'Discord', 'Add contact for remote interview'),
+// 	createData('Trilogy', 0, '2:00PM', '11/07', 'Overland Park', 'Phone Interview'),
+// 	createData('Sprint', 1, '1:45PM', '11/10', 'Leawood', '2nd Floor, Suite #211'),
+// ];
 
 class Interviews extends Component {
 	state = {
@@ -89,6 +89,18 @@ class Interviews extends Component {
 			const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
+		}
+		const convertTime = t => {
+			let time = t.split(':')
+			let [hour, minute] = time
+			let foo = 'AM' // really dont know what this is called, so now its foo
+			if(hour > 12) {
+				time.shift()
+				time.unshift(hour - 12)
+				foo = 'PM'
+				console.log(hour)
+			}
+			return time.join(':') + ' ' + foo
 		}
 
 		return (
@@ -115,7 +127,7 @@ class Interviews extends Component {
 									{job.companyName}
 								</CustomTableCell>
 								<CustomTableCell numeric>{i + 1}</CustomTableCell>
-								<CustomTableCell numeric>{job.interviewTime}</CustomTableCell>
+								<CustomTableCell numeric>{convertTime(job.interviewTime)}</CustomTableCell>
 								<CustomTableCell numeric>{convertedDate(job.interviewDate)}</CustomTableCell>
 								<CustomTableCell>{job.location}</CustomTableCell>
 								{/* <CustomTableCell>{job.notes}</CustomTableCell> */}
