@@ -16,7 +16,7 @@
 
 // export default Interviews
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -26,92 +26,111 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import API from '../utils/API'
+import { Typography } from '@material-ui/core';
 
 const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
+	head: {
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.common.white,
+	},
+	body: {
+		fontSize: 14,
+	},
 }))(TableCell);
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 10,
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
+	root: {
+		width: '100%',
+		marginTop: theme.spacing.unit * 10,
+		overflowX: 'auto',
+	},
+	table: {
+		minWidth: 700,
+	},
+	row: {
+		'&:nth-of-type(odd)': {
+			backgroundColor: theme.palette.background.default,
+		},
+	},
+	msg: {
+		marginTop: theme.spacing.unit * 10,		
+	}
 });
 
 let id = 0;
-function createData(name, interviewNum, time, date, location, notes ) {
-  id += 1;
-  return { id, name, interviewNum, time, date, location, notes };
+function createData(name, interviewNum, time, date, location, notes) {
+	id += 1;
+	return { id, name, interviewNum, time, date, location, notes };
 }
 
 const rows = [
-  createData('Cerner', 2, '3:45PM', '10/29', 'NKC', 'Bring MacBook'),
-  createData('Saint Lukes', 1, '10:00AM', '11/03', 'Plaza', 'Dr. Jones refferal'),
-  createData('Google Fiber', 0, '12:00PM', '10/30', 'Discord', 'Add contact for remote interview'),
-  createData('Trilogy', 0, '2:00PM', '11/07','Overland Park', 'Phone Interview'),
-  createData('Sprint', 1, '1:45PM', '11/10', 'Leawood', '2nd Floor, Suite #211'),
+	createData('Cerner', 2, '3:45PM', '10/29', 'NKC', 'Bring MacBook'),
+	createData('Saint Lukes', 1, '10:00AM', '11/03', 'Plaza', 'Dr. Jones refferal'),
+	createData('Google Fiber', 0, '12:00PM', '10/30', 'Discord', 'Add contact for remote interview'),
+	createData('Trilogy', 0, '2:00PM', '11/07', 'Overland Park', 'Phone Interview'),
+	createData('Sprint', 1, '1:45PM', '11/10', 'Leawood', '2nd Floor, Suite #211'),
 ];
 
-function Interviews(props) {
-  const { classes } = props;
-//   state = {
-// 	  user: {}
-//   }
+class Interviews extends Component {
+	state = {
+		jobs: []
+	}
+	async componentDidMount() {
+		let user = await API.getUser(this.props.uid)
+		console.log(user.job)
+		let interviews = user.job.filter(job => job.interview)
+		this.setState({ jobs: interviews })
+	}
+	render() {
+		const { classes } = this.props;
+		console.log(this.state)
+		const convertedDate = (dateToConvert) => {
+			const date = dateToConvert.substring(0, 10).split('-')
+			const [ year, month, day ] = date
+			return `${month}/${day}/${year}`
+		}
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-			<CustomTableCell></CustomTableCell>
-            <CustomTableCell>Company Name</CustomTableCell>
-            <CustomTableCell numeric>Interview #</CustomTableCell>
-            <CustomTableCell numeric>Time</CustomTableCell>
-            <CustomTableCell numeric>Date</CustomTableCell>
-            <CustomTableCell>Location</CustomTableCell>
-			<CustomTableCell>Notes</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => {
-            return (
-				
-              <TableRow className={classes.row} key={row.id}>
-			  <CustomTableCell padding="checkbox"><Checkbox name="cBox" /></CustomTableCell>
-				<CustomTableCell component="th" scope="row">
-                  {row.name}
-                </CustomTableCell>
-               <CustomTableCell numeric>{row.interviewNum}</CustomTableCell>
-                <CustomTableCell numeric>{row.time}</CustomTableCell>
-                <CustomTableCell numeric>{row.date}</CustomTableCell>
-                <CustomTableCell>{row.location}</CustomTableCell>
-				<CustomTableCell>{row.notes}</CustomTableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+		return (
+			<div>
+			{this.state.jobs.length === 0 && <Typography className={classes.msg}>You dont have any interviews :(</Typography>}
+			<Paper className={classes.root}>
+				{this.state.jobs.length > 0 && <Table className={classes.table}>
+					<TableHead>
+						<TableRow>
+							<CustomTableCell></CustomTableCell>
+							<CustomTableCell>Company Name</CustomTableCell>
+							<CustomTableCell numeric>Interview #</CustomTableCell>
+							<CustomTableCell numeric>Time</CustomTableCell>
+							<CustomTableCell numeric>Date</CustomTableCell>
+							<CustomTableCell>Location</CustomTableCell>
+							{/* <CustomTableCell>Notes</CustomTableCell> */}
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{this.state.jobs.map((job, i) => (
+							<TableRow className={classes.row} key={i}>
+								<CustomTableCell padding="checkbox"><Checkbox name="cBox" /></CustomTableCell>
+								<CustomTableCell component="th" scope="row">
+									{job.companyName}
+								</CustomTableCell>
+								<CustomTableCell numeric>{i + 1}</CustomTableCell>
+								<CustomTableCell numeric>{job.interviewTime}</CustomTableCell>
+								<CustomTableCell numeric>{convertedDate(job.interviewDate)}</CustomTableCell>
+								<CustomTableCell>{job.location}</CustomTableCell>
+								{/* <CustomTableCell>{job.notes}</CustomTableCell> */}
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>}
+			</Paper>
+			</div>
+		);
+	}
 }
 
 Interviews.propTypes = {
-  classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Interviews);

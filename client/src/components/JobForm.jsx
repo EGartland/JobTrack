@@ -23,6 +23,9 @@ class JobForm extends React.Component {
 		phone: '',
 		email: '',
 		appliedDate: new Date().toISOString().substring(0, 10),
+		interviewDate: new Date().toISOString().substring(0, 10),
+		interviewTime: '',
+		location: '',
 		errMsg: [],
 		error: false,
 		jobTitleErr: false,
@@ -34,11 +37,13 @@ class JobForm extends React.Component {
 		if (this.props.match.params.id) {
 			let { id } = this.props.match.params
 			let job = await API.getJob(id)
-			let {appliedDate, interview, ...rest} = job
+			console.log(job)
+			let { appliedDate, interview, interviewDate, ...rest } = job
 			appliedDate = appliedDate.substring(0, 10)
+			interviewDate = interviewDate.substring(0, 10)
 			interview = interview.toString()
-			console.log(appliedDate, rest, interview)
-			this.setState({appliedDate, interview, ...rest, jobId: id, update: true, title: 'Update job' })
+			// console.log(appliedDate, rest, interview)
+			this.setState({ appliedDate, interview, interviewDate, ...rest, jobId: id, update: true, title: 'Update job' })
 		} else {
 			this.reset()
 		}
@@ -57,6 +62,9 @@ class JobForm extends React.Component {
 			phone: '',
 			email: '',
 			appliedDate: new Date().toISOString().substring(0, 10),
+			interviewDate: new Date().toISOString().substring(0, 10),
+			interviewTime: '',
+			location: '',
 			errMsg: [],
 			error: false,
 			jobTitleErr: false,
@@ -83,8 +91,8 @@ class JobForm extends React.Component {
 			jobTitleErr: false,
 			companyNameErr: false,
 		})
-		let { jobTitle, companyName, status, interview, phone, email, appliedDate } = this.state
-		isNull(appliedDate) || appliedDate === '' ? this.setState({appliedDate: new Date()}) : appliedDate
+		let { jobTitle, companyName, status, interview, phone, email, appliedDate, interviewDate, interviewTime, location } = this.state
+		isNull(appliedDate) || appliedDate === '' ? this.setState({ appliedDate: new Date() }) : appliedDate
 		if (this.state.update) {
 			await API.updateJob(this.state.jobId, {
 				jobTitle,
@@ -94,8 +102,11 @@ class JobForm extends React.Component {
 				phone,
 				email,
 				appliedDate,
+				interviewDate,
+				interviewTime,
+				location
 			})
-			this.setState({ update: false })
+			this.setState({ update: false, msg: 'Job updated' })
 		} else {
 			console.log(appliedDate)
 			let job = await API.addJob(this.state.uid, {
@@ -106,11 +117,14 @@ class JobForm extends React.Component {
 				phone,
 				email,
 				appliedDate,
+				interviewDate,
+				interviewTime,
+				location
 			})
 			const errors = []
 			let errorList = job.errors
 			for (const key in errorList) {
-				this.setState({[key]: true})
+				this.setState({ [key]: true })
 				let err = errorList[key]
 				let str = `${key} ${err.kind}`
 				errors.push(str)
@@ -127,7 +141,7 @@ class JobForm extends React.Component {
 		}
 	}
 	async updateUser() {
-		if(sessionStorage.getItem('user')) {
+		if (sessionStorage.getItem('user')) {
 			let user = JSON.parse(sessionStorage.getItem('user'))
 			let updated = API.getUser(user._id)
 			sessionStorage.setItem('user', JSON.stringify(updated))
@@ -137,8 +151,8 @@ class JobForm extends React.Component {
 	render() {
 		// console.log(this.state)
 		return (
-			<div class='container'>
-			<br></br>
+			<div className='container'>
+				<br></br>
 				<p>{this.state.title}</p>
 				<form className='jobContainer' onSubmit={this.onSubmit}>
 					<TextField
@@ -149,9 +163,9 @@ class JobForm extends React.Component {
 						onChange={this.handleChange}
 						error={this.state.jobTitleErr || this.state.jobTitle.length < 3}
 						fullWidth={true}
-						
+
 					/>
-					<br/>
+					<br />
 					<TextField
 						label='Company Name *'
 						value={this.state.companyName}
@@ -163,7 +177,7 @@ class JobForm extends React.Component {
 					/>
 					<br />
 					<br />
-{/* 				
+					{/* 				
 					<TextField // change this to select for Boolean
 						// label='Interview'
 						value={this.state.interview}
@@ -183,7 +197,7 @@ class JobForm extends React.Component {
 						type='tel'
 						fullWidth={true}
 					/>
-					<br/>
+					<br />
 					<TextField
 						label='Contact Email'
 						value={this.state.email}
@@ -256,6 +270,38 @@ class JobForm extends React.Component {
 							/>
 						</RadioGroup>
 					</FormControl>
+					{this.state.interview === 'true' && (
+						<div>
+							<TextField
+								// label='Applied Date'
+								value={this.state.interviewDate}
+								name='interviewDate'
+								margin='normal'
+								onChange={this.handleChange}
+								type='date'
+								max={new Date().toISOString().substring(0, 9)}
+								fullWidth={true}
+							/>
+							<TextField
+								// label='Applied Date'
+								value={this.state.interviewTime}
+								name='interviewTime'
+								margin='normal'
+								onChange={this.handleChange}
+								type='time'
+								// max={new Date().toISOString().substring(0, 9)}
+								fullWidth={true}
+							/>
+							<TextField
+								label='Location'
+								value={this.state.location}
+								name='location'
+								margin='normal'
+								onChange={this.handleChange}
+								fullWidth={true}
+							/>
+						</div>
+					)}
 					<br></br>
 					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
 					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}

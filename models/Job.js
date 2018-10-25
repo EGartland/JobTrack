@@ -37,6 +37,15 @@ const JobSchema = new Schema({
 	appliedDate: {
 		type: Date,
 		default: Date.now()
+	},
+	interviewDate: {
+		type: Date,
+	},
+	interviewTime: {
+		type: String
+	},
+	location: {
+		type: String
 	}
 })
 

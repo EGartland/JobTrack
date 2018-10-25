@@ -127,7 +127,7 @@ render () {
 			  		label='Name *'												
 					value={this.state.name}
 					name='name'
-					margin='normal'
+					// margin='normal' //has to be either 'dense' or 'none'
 					onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -138,7 +138,7 @@ render () {
 					className=''
 					value={this.state.password}
 					name= 'password'
-					margin='normal'
+					// margin='normal' //has to be either 'dense' or 'none'
 					onChange={this.handleChange}
 					autoComplete='stoof'
 					/>
