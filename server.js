@@ -15,7 +15,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/jobsdb";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-app.use(express.static('client/public'));
+app.use(express.static('client/build'));
 
 app.use(logger('dev'));
 
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', apiRoutes)
 
 app.get('*', (req, res) => 
-    res.sendFile('client/public/index.html')
+    res.sendFile('client/build/index.html')
 )
 
 app.listen(PORT, function(){
