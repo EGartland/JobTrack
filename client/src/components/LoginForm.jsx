@@ -199,7 +199,7 @@ render () {
               {this.state.status}
             </Button>
           </form>
-		  {this.state.status && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.other}</a></p>}
+		  {this.state.status && <p>{this.state.text}<a onClick={this.changeForm} style={{textDecoration: 'underline', cursor: 'grab'}}>{this.state.other}</a></p>}
         </Paper>
       </main>
     </React.Fragment>
