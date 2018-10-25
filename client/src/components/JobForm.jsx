@@ -138,6 +138,7 @@ class JobForm extends React.Component {
 		// console.log(this.state)
 		return (
 			<div class='container'>
+			<br></br>
 				<p>{this.state.title}</p>
 				<form className='jobContainer' onSubmit={this.onSubmit}>
 					<TextField

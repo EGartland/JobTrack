@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
 								>
 									<MenuIcon />
 								</IconButton>
-								<Typography component="h1" variant="display2" color="inherit" noWrap className={classes.title} >
+								<Typography component="h1" variant="display1" color="inherit" noWrap className={classes.title} >
 									Job Track
               					</Typography>
 								<IconButton color="inherit">

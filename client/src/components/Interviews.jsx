@@ -5,7 +5,11 @@ class Interviews extends React.Component {
 		user: {}
 	}
 	render() {
-		return (<p>My Interviews</p>
+		return (
+		<div>
+		<br></br>
+		<p>My Interviews</p>
+		</div>
 		)
 	}
 }

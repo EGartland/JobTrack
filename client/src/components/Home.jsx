@@ -10,6 +10,7 @@ class Home extends Component {
 	render() {
 		return (
 			<div>
+				<br></br>
 				<p>Welcome {this.state.user.niceName}!</p>
 			</div>
 		)

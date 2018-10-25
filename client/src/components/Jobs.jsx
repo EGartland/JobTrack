@@ -65,6 +65,7 @@ class Jobs extends Component {
 		}
 		return (
 			<div>
+				<br></br>
 				<p>My Jobs</p>
 				{this.state.jobs.length === 0 && <p>You have no jobs to display.</p>}
 				{this.state.jobs.length > 0 && 

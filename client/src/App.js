@@ -31,7 +31,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-		<Typography align='center' variant='headline'>Job Track</Typography>
 		{!this.state.user.name && !this.state.auth && <LoginForm login setUser={this.setUser}/>}
 		{this.state.auth && this.state.user.niceName && < Dashboard logout={this.handleLogout} user={this.state.user} />}
       </div>
