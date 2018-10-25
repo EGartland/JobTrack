@@ -10,12 +10,11 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Home, Jobs, JobForm, Calendar, Interviews, Contact, LinksList, NavList } from '.'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Home, Jobs, JobForm, Calendar, Interviews, Contact, LinksList, NavList } from '.';
 
 const drawerWidth = 240;
 
@@ -107,6 +106,9 @@ const styles = theme => ({
 	heroButtons: {
 		marginTop: theme.spacing.unit * 4,
 	},
+	button: {
+		margin: theme.spacing.unit,
+	  },
 });
 
 class Dashboard extends React.Component {
@@ -150,12 +152,9 @@ class Dashboard extends React.Component {
 								<Typography component="h1" variant="display1" color="inherit" noWrap className={classes.title} >
 									Job Track
               					</Typography>
-								<IconButton color="inherit">
-									{/* <Badge badgeContent={4} color="secondary">
-										<NotificationsIcon onClick={this.logout} />
-									</Badge> */}
-									<Typography onClick={this.logout} style={{color: 'ghostwhite'}}>Logout</Typography>
-								</IconButton>
+									
+									<Button onClick={this.logout} variant="contained" color="secondary" className={classes.button}>Sign Out</Button>
+								
 							</Toolbar>
 						</AppBar>
 						<Drawer
@@ -206,7 +205,7 @@ Dashboard.propTypes = {
 export default withStyles(styles)(Dashboard);
 
 
-{/* <div className={classes.heroUnit}>
+/* <div className={classes.heroUnit}>
 	<div className={classes.heroContent}>
 		<Typography variant="h2" align="center" color="textPrimary" gutterBottom>
 			Job Track
@@ -231,4 +230,4 @@ export default withStyles(styles)(Dashboard);
 			</Grid>
 		</div>
 	</div>
-</div> */}
+</div> */

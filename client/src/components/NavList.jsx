@@ -57,7 +57,7 @@ const NavList = () => (
 				<ListItemIcon>
 					<CalendarTodayIcon />
 				</ListItemIcon>
-				<ListItemText primary="Calendar" />
+				<ListItemText primary="Resources" />
 			</ListItem>
 		</Link>
 	</div>
