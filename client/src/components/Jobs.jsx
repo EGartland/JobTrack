@@ -32,8 +32,8 @@ class Jobs extends Component {
 	}
 
 	async componentDidMount() {
-			let user = await API.getUser(this.props.uid)
-			this.setState({jobs: user.job})	
+		let user = await API.getUser(this.props.uid)
+		this.setState({jobs: user.job})	
 	}
 
 	async handleDelete(id) {
@@ -53,16 +53,11 @@ class Jobs extends Component {
 
 	render() {
 		const convertedDate = (dateToConvert) => {
-			// console.log('date: ', dateToConvert)
-			// const date = new Date(dateToConvert)
-			// console.log('date2: ', date)
-			// let newDate = `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`
-			// console.log('newDate: ', newDate)
-			// return newDate
 			const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
 		}
+		console.log(this.state.jobs)
 		return (
 			<div>
 				<br></br>
