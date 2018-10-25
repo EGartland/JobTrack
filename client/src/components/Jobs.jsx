@@ -49,7 +49,20 @@ class Jobs extends Component {
 		
 	}
 
+
+
 	render() {
+		const convertedDate = (dateToConvert) => {
+			// console.log('date: ', dateToConvert)
+			// const date = new Date(dateToConvert)
+			// console.log('date2: ', date)
+			// let newDate = `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`
+			// console.log('newDate: ', newDate)
+			// return newDate
+			const date = dateToConvert.substring(0, 10).split('-')
+			const [ year, month, day ] = date
+			return `${month}/${day}/${year}`
+		}
 		return (
 			<div>
 				<p>My Jobs</p>
@@ -60,7 +73,10 @@ class Jobs extends Component {
 						<Typography>Position: {job.jobTitle}</Typography> 
 						<Typography>Company: {job.companyName}</Typography>
 						<Typography>Status: {job.status}</Typography>
-						<Typography>Company Contact: {job.phone}</Typography>{job.appliedDate} |  Company Contact: {job.phone}<button class='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button class='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
+						<Typography>Company Contact: {job.phone}</Typography>
+						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
+
+						<button className='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button className='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
 					</ul>
 				}
 			</div>

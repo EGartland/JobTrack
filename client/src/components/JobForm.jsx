@@ -120,7 +120,7 @@ class JobForm extends React.Component {
 				this.setState({ error: true, errMsg: errors })
 			} else {
 				this.setState({
-					msg: 'job created successfully!'
+					msg: 'Job added!'
 				})
 				setTimeout(this.reset, 1000)
 			}
@@ -203,8 +203,8 @@ class JobForm extends React.Component {
 						max={new Date().toISOString().substring(0, 9)}
 						fullWidth={true}
 					/>
-					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
-					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}
+					{/* {this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
+					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>} */}
 					<br />
 					<br />
 					<FormControl>
@@ -256,6 +256,8 @@ class JobForm extends React.Component {
 						</RadioGroup>
 					</FormControl>
 					<br></br>
+					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
+					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}
 					<Button id='submitBtn' type='submit'>{this.state.update ? 'Update' : 'Submit'}</Button>
 				</form>
 			</div>
