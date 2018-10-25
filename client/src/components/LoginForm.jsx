@@ -13,6 +13,7 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { TextField } from '@material-ui/core'
 
 const styles = theme => ({
 	layout: {
@@ -117,7 +118,7 @@ render () {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+			{this.state.status}
           </Typography>
           <form onSubmit={this.onSubmit} className={classes.userForm} noValidate autoComplete='off'>
             <FormControl margin="normal" required fullWidth>
@@ -142,10 +143,52 @@ render () {
 					autoComplete='stoof'
 					/>
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+			{this.state.status === 'Register' && 
+					<React.Fragment>
+						<br/>
+						<TextField
+							label='Resume'
+							type='url'
+							value={this.state.resume}
+							name='resume'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						<br/>
+						<TextField
+							label='LinkedIn'
+							type='url'
+							value={this.state.linkedIn}
+							name='linkedIn'
+							margin='normal'
+							onChange={this.handleChange}
+							
+						/>
+						<br/>
+						<TextField
+							label='GitHub'
+							type='url'
+							value={this.state.gitHub}
+							name='gitHub'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						<br/>
+						<TextField
+							label='Portfolio'
+							type='url'
+							value={this.state.portfolio}
+							name='portfolio'
+							margin='normal'
+							onChange={this.handleChange}
+						/>
+						</React.Fragment>
+					}
+                    <br></br>
+			{this.state.status === 'Login' && <FormControlLabel
+				control={<Checkbox value="remember" color="primary" />}
+				label="Remember me"
+			/>}
             <Button
               type="submit"
               fullWidth
@@ -153,9 +196,10 @@ render () {
               color="primary"
               className={classes.submit}
             >
-              Sign in
+              {this.state.status}
             </Button>
           </form>
+		  {this.state.status && <p>{this.state.text}<a onClick={this.changeForm}>{this.state.other}</a></p>}
         </Paper>
       </main>
     </React.Fragment>
