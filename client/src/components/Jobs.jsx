@@ -74,7 +74,8 @@ class Jobs extends Component {
 						<Typography>Position: {job.jobTitle}</Typography> 
 						<Typography>Company: {job.companyName}</Typography>
 						<Typography>Status: {job.status}</Typography>
-						<Typography>Company Contact: {job.phone}</Typography>
+						{/* this company contact should be better, lemme think on it */}
+						{job.phone.trim() !== '' && <Typography>Company Contact: {job.phone !== '' && `Phone: ${job.phone}`} | {job.email !== '' && `Email: ${job.email}`}</Typography>}
 						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
 
 						<button className='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button className='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
