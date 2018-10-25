@@ -53,8 +53,15 @@ class Jobs extends Component {
 
 	render() {
 		const convertedDate = (dateToConvert) => {
-			const date = new Date(dateToConvert)
-			return `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`
+			// console.log('date: ', dateToConvert)
+			// const date = new Date(dateToConvert)
+			// console.log('date2: ', date)
+			// let newDate = `${date.getMonth()}/${date.getDay()}/${date.getFullYear()}`
+			// console.log('newDate: ', newDate)
+			// return newDate
+			const date = dateToConvert.substring(0, 10).split('-')
+			const [ year, month, day ] = date
+			return `${month}/${day}/${year}`
 		}
 		return (
 			<div>
@@ -63,13 +70,13 @@ class Jobs extends Component {
 				{this.state.jobs.length > 0 && 
 					<ul>
 						{this.state.jobs.map(job => <Card id='card' key={job._id}>
-						<Typography><h4>Position: {job.jobTitle}</h4></Typography> 
-						<Typography><h4>Company: {job.companyName}</h4></Typography>
-						<Typography><h4>Status: {job.status}</h4></Typography>
-						<Typography><h4>Company Contact: {job.phone}</h4></Typography>
-						<Typography><h4>Date Applied: {convertedDate(job.appliedDate)}</h4></Typography>
+						<Typography>Position: {job.jobTitle}</Typography> 
+						<Typography>Company: {job.companyName}</Typography>
+						<Typography>Status: {job.status}</Typography>
+						<Typography>Company Contact: {job.phone}</Typography>
+						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
 
-						<button class='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button class='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
+						<button className='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button className='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
 					</ul>
 				}
 			</div>
