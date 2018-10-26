@@ -76,8 +76,15 @@ class LoginForm extends React.Component {
 			data.auth ? this.props.setUser(data.user) : this.setState({error: data.status})
 		} else {
 			let links = [resume, linkedIn, gitHub, portfolio]
-			API.register(name, password, links)
-			this.changeForm()
+			links = links.filter(link => link !== '')
+			let user = await API.register(name, password, links)
+			if(!user._id) {
+				//user is a string that contains the validation errors at this point
+				
+				this.setState({error: user})
+			} else {
+				this.changeForm()
+			}
 		}
 	}
 	
@@ -189,6 +196,7 @@ render () {
 				control={<Checkbox value="remember" color="primary" />}
 				label="Remember me"
 			/>}
+			<p>{this.state.error}</p>
             <Button
               type="submit"
               fullWidth

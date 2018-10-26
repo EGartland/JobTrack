@@ -127,6 +127,7 @@ class Interviews extends Component {
 
 Interviews.propTypes = {
 	classes: PropTypes.object.isRequired,
+	uid: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Interviews);
