@@ -26,7 +26,6 @@ const JobSchema = new Schema({
 	},
 	hasContact: {
 		type: Boolean,
-		default: false
 	},
 	phone: {
 		type: String,
@@ -40,12 +39,15 @@ const JobSchema = new Schema({
 	},
 	interviewDate: {
 		type: Date,
+		// required: this.interview
 	},
 	interviewTime: {
-		type: String
+		type: String,
+		// required: this.interview
 	},
 	location: {
-		type: String
+		type: String,
+		// required: this.interview
 	}
 })
 

@@ -41,7 +41,7 @@ const jobController = {
     },
     async delete(id) {
 		try {
-			let deletedJob = await db.Job.findOneAndRemove(id)
+			let deletedJob = await db.Job.findOneAndRemove({_id: id})
 			return deletedJob
 		} catch(err) {
 			throw err

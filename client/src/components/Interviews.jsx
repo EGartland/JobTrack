@@ -1,21 +1,3 @@
-// import React from 'react'
-
-// class Interviews extends React.Component {
-// 	state = {
-// 		user: {}
-// 	}
-// 	render() {
-// 		return (
-// 		<div>
-// 		<br></br>
-// 		<p>My Interviews</p>
-// 		</div>
-// 		)
-// 	}
-// }
-
-// export default Interviews
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -78,29 +60,31 @@ class Interviews extends Component {
 	}
 	async componentDidMount() {
 		let user = await API.getUser(this.props.uid)
-		console.log(user.job)
+		// console.log(user.job)
 		let interviews = user.job.filter(job => job.interview)
 		this.setState({ jobs: interviews })
 	}
 	render() {
 		const { classes } = this.props;
-		console.log(this.state)
+		// console.log(this.state)
 		const convertedDate = (dateToConvert) => {
 			const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
 		}
 		const convertTime = t => {
-			let time = t.split(':')
-			let [hour, minute] = time
-			let foo = 'AM' // really dont know what this is called, so now its foo
-			if(hour > 12) {
-				time.shift()
-				time.unshift(hour - 12)
-				foo = 'PM'
-				console.log(hour)
+			if(t) {
+				let time = t.split(':')
+				let [hour] = time
+				let foo = 'AM' // really dont know what this is called, so now its foo
+				if(hour > 12) {
+					time.shift()
+					time.unshift(hour - 12)
+					foo = 'PM'
+					console.log(hour)
+				}
+				return time.join(':') + ' ' + foo
 			}
-			return time.join(':') + ' ' + foo
 		}
 
 		return (

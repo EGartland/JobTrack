@@ -43,21 +43,16 @@ class Jobs extends Component {
 
 	async updateJobs() {
 		let user = await API.getUser(this.props.uid)
-		console.log(user)
 		sessionStorage.setItem('user', JSON.stringify(user))
 		this.setState({jobs: user.job})
 		
 	}
-
-
-
 	render() {
 		const convertedDate = (dateToConvert) => {
 			const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
 		}
-		console.log(this.state.jobs)
 		return (
 			<div>
 				<br></br>
@@ -71,7 +66,6 @@ class Jobs extends Component {
 						<Typography>Status: {job.status}</Typography>
 						<Typography>Company Contact: {job.phone}</Typography>
 						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
-
 						<button className='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button className='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
 					</ul>
 				}
