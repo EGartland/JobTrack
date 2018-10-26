@@ -26,7 +26,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -86,7 +86,7 @@ function Contact(props) {
             return (
 				
               <TableRow className={classes.row} key={row.id}>
-			  <CustomTableCell padding="checkbox"><Checkbox name="cBox" /></CustomTableCell>
+			  <CustomTableCell padding="checkbox"><Checkbox label="cBox" color="primary"/></CustomTableCell>
 				<CustomTableCell component="th" scope="row">
                   {row.name}
                 </CustomTableCell>

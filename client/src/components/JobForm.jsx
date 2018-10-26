@@ -4,6 +4,7 @@ import API from '../utils/API';
 import { isNull } from 'util';
 import { withStyles } from '@material-ui/core/styles';
 import '../styles/jobForm.css'
+import Paper from '@material-ui/core/Paper';
 
 const styles = {
 	body: {
@@ -160,9 +161,10 @@ class JobForm extends React.Component {
 	render() {
 		// console.log(this.state)
 		return (
+			<Paper id='paperStyle'>
 			<div className='container'>
 				<br></br>
-				<p>{this.state.title}</p>
+				<p id='newJobTitle'>{this.state.title}</p>
 				<form className='jobContainer' onSubmit={this.onSubmit}>
 					<TextField
 						label='Job Title *'
@@ -308,6 +310,7 @@ class JobForm extends React.Component {
 					<Button id='submitBtn' type='submit'>{this.state.update ? 'Update' : 'Submit'}</Button>
 				</form>
 			</div>
+			</Paper>
 		)
 	}
 }
