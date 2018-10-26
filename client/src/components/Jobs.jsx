@@ -5,7 +5,11 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import '../styles/jobTab.css'
 import { Typography } from '@material-ui/core';
-const styles = {
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Button from '@material-ui/core/Button';
+
+
+const styles = theme => ({
 	card: {
 	  minWidth: 275,
 	},
@@ -20,7 +24,19 @@ const styles = {
 	pos: {
 	  marginBottom: 12,
 	},
-  };
+	snackbar: {
+		backgroundColor: theme.palette.secondary.main,
+		width: 'flex',
+		height: 75,
+},
+button: {
+	margin: theme.spacing.unit,
+},
+input: {
+	display: 'none',
+},
+
+  });
 
 
 
@@ -48,15 +64,21 @@ class Jobs extends Component {
 		
 	}
 	render() {
+		const { classes } = this.props;
 		const convertedDate = (dateToConvert) => {
 			const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
 		}
 		return (
+			
 			<div>
 				<br></br>
-				<p>My Jobs</p>
+				<br></br>
+				<br></br>
+				<br></br>
+				<SnackbarContent className={classes.snackbar} message='Jobs Applied For' variant='h6' />
+				<br></br>
 				{this.state.jobs.length === 0 && <p>You have no jobs to display.</p>}
 				{this.state.jobs.length > 0 && 
 					<ul>
@@ -66,7 +88,8 @@ class Jobs extends Component {
 						<Typography>Status: {job.status}</Typography>
 						<Typography>Company Contact: {job.phone}</Typography>
 						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
-						<button className='jobBtn'><Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}>Update</Link></button> | <button className='jobBtn' onClick={() => this.handleDelete(job._id)}>Delete</button></Card>)}
+						<Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" className={classes.button}>Update</Button></Link>
+						 <Button variant="contained" color="primary" className={classes.button} onClick={() => this.handleDelete(job._id)}>Delete</Button></Card>)}
 					</ul>
 				}
 			</div>

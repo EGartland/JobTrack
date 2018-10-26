@@ -1,23 +1,30 @@
 import React from 'react'
-import { TextField, Button, FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Select, Input, MenuItem, InputLabel } from '@material-ui/core'
+import { TextField, Button, FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, Select, Input, MenuItem, InputLabel, FormHelperText } from '@material-ui/core'
 import API from '../utils/API';
 import { isNull } from 'util';
 import { withStyles } from '@material-ui/core/styles';
 import '../styles/jobForm.css'
 import Paper from '@material-ui/core/Paper';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-const styles = {
+const styles = theme => ({
 	body: {
 		width: '58%',
 	},
+	snackbar: {
+        backgroundColor: theme.palette.secondary.main,
+		width: 'flex',
+		height: 75,
+    },
 }
+)
 
 const currentDate = () => new Date().toISOString().substring(0, 10)
 
 class JobForm extends React.Component {
 
 	state = {
-		title: 'Add new job',
+		// title: 'Add new job',
 		update: false,
 		jobTitle: '',
 		companyName: '',
@@ -160,11 +167,13 @@ class JobForm extends React.Component {
 
 	render() {
 		// console.log(this.state)
+		const { classes } = this.props;
 		return (
 			<Paper id='paperStyle'>
 			<div className='container'>
+			<SnackbarContent className={classes.snackbar} message='Add a new job' variant='h6' />
 				<br></br>
-				<p id='newJobTitle'>{this.state.title}</p>
+				{/* <p id='newJobTitle'>{this.state.title}</p> */}
 				<form className='jobContainer' onSubmit={this.onSubmit}>
 					<TextField
 						label='Job Title *'

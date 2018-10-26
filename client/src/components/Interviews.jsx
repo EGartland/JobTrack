@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import API from '../utils/API'
 import { Typography } from '@material-ui/core';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 const CustomTableCell = withStyles(theme => ({
 	head: {
@@ -37,7 +38,12 @@ const styles = theme => ({
 	},
 	msg: {
 		marginTop: theme.spacing.unit * 10,		
-	}
+	},
+	snackbar: {
+        backgroundColor: theme.palette.secondary.main,
+		width: 'flex',
+		height: 75,
+    },
 });
 
 // let id = 0;
@@ -89,6 +95,11 @@ class Interviews extends Component {
 
 		return (
 			<div>
+				<br></br>
+				<br></br>
+				<br></br>
+				<br></br>
+			<SnackbarContent className={classes.snackbar} message='Interviews' variant='h6' />
 			{this.state.jobs.length === 0 && <Typography className={classes.msg}>You dont have any interviews :(</Typography>}
 			<Paper className={classes.root}>
 				{this.state.jobs.length > 0 && <Table className={classes.table}>

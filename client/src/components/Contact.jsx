@@ -23,15 +23,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.common.white,
   },
   body: {
     fontSize: 14,
   },
+
 }))(TableCell);
 
 const styles = theme => ({
@@ -46,8 +48,13 @@ const styles = theme => ({
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
-    },
+	},
   },
+  snackbar: {
+	backgroundColor: theme.palette.secondary.main,
+	width: 'flex',
+	height: 75,
+},
 });
 
 let id = 0;
@@ -68,6 +75,12 @@ function Contact(props) {
   const { classes } = props;
 
   return (
+	<div>
+		<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+	<SnackbarContent className={classes.snackbar} message='Contacts' variant='h6' />
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
@@ -86,7 +99,7 @@ function Contact(props) {
             return (
 				
               <TableRow className={classes.row} key={row.id}>
-			  <CustomTableCell padding="checkbox"><Checkbox label="cBox" color="primary"/></CustomTableCell>
+			  <CustomTableCell padding="checkbox"><Checkbox label="cBox" color="secondary"/></CustomTableCell>
 				<CustomTableCell component="th" scope="row">
                   {row.name}
                 </CustomTableCell>
@@ -101,6 +114,7 @@ function Contact(props) {
         </TableBody>
       </Table>
     </Paper>
+	</div>
   );
 }
 
