@@ -5,11 +5,13 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import '../styles/jobTab.css'
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
+
 	card: {
 	  minWidth: 275,
 	},
@@ -96,5 +98,10 @@ class Jobs extends Component {
 		)
 	}
 }
+
+Jobs.propTypes = {
+	classes: PropTypes.object.isRequired,
+	uid: PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(Jobs)
