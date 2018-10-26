@@ -12,6 +12,8 @@ const styles = {
 	},
 }
 
+const currentDate = () => new Date().toISOString().substring(0, 10)
+
 class JobForm extends React.Component {
 
 	state = {
@@ -23,8 +25,8 @@ class JobForm extends React.Component {
 		interview: 'false',
 		phone: '',
 		email: '',
-		appliedDate: new Date().toISOString().substring(0, 10),
-		interviewDate: new Date().toISOString().substring(0, 10),
+		appliedDate: currentDate(),
+		interviewDate: currentDate(),
 		interviewTime: '',
 		location: '',
 		errMsg: [],
@@ -62,8 +64,8 @@ class JobForm extends React.Component {
 			interview: 'false',
 			phone: '',
 			email: '',
-			appliedDate: new Date().toISOString().substring(0, 10),
-			interviewDate: new Date().toISOString().substring(0, 10),
+			appliedDate: currentDate(),
+			interviewDate: currentDate(),
 			interviewTime: '',
 			location: '',
 			errMsg: [],
@@ -94,8 +96,10 @@ class JobForm extends React.Component {
 		})
 		let { jobTitle, companyName, status, interview, phone, email, appliedDate, interviewDate, interviewTime, location } = this.state
 		isNull(appliedDate) || appliedDate === '' ? this.setState({ appliedDate: new Date() }) : appliedDate
+		let hasContact = phone !== '' || email !== '' ? true : false
+		// console.log(phone, email, hasContact)
 		if (this.state.update) {
-			await API.updateJob(this.state.jobId, {
+			let job = await API.updateJob(this.state.jobId, {
 				jobTitle,
 				companyName,
 				status,
@@ -105,11 +109,13 @@ class JobForm extends React.Component {
 				appliedDate,
 				interviewDate,
 				interviewTime,
-				location
+				location,
+				hasContact
 			})
 			this.setState({ update: false, msg: 'Job updated' })
+			// console.log(job)
 		} else {
-			console.log(appliedDate)
+			// console.log(appliedDate)
 			let job = await API.addJob(this.state.uid, {
 				jobTitle,
 				companyName,
@@ -120,7 +126,8 @@ class JobForm extends React.Component {
 				appliedDate,
 				interviewDate,
 				interviewTime,
-				location
+				location,
+				hasContact
 			})
 			const errors = []
 			let errorList = job.errors
@@ -139,7 +146,9 @@ class JobForm extends React.Component {
 				})
 				setTimeout(this.reset, 1000)
 			}
+			// console.log(job)
 		}
+
 	}
 	async updateUser() {
 		if (sessionStorage.getItem('user')) {
@@ -179,15 +188,6 @@ class JobForm extends React.Component {
 					/>
 					<br />
 					<br />
-					{/* 				
-					<TextField // change this to select for Boolean
-						// label='Interview'
-						value={this.state.interview}
-						name='interview'
-						margin='normal'
-						onChange={this.handleChange}
-						type='radio'
-					/> */}
 					<br />
 					<TextField
 						label='Contact Phone'
@@ -281,7 +281,7 @@ class JobForm extends React.Component {
 								margin='normal'
 								onChange={this.handleChange}
 								type='date'
-								max={new Date().toISOString().substring(0, 9)}
+								// max={new Date().toISOString().substring(0, 9)}
 								fullWidth={true}
 							/>
 							<TextField
