@@ -177,7 +177,7 @@ class Dashboard extends React.Component {
 									</List>
 									<Divider />
 									<List>
-										<LinksList />
+										<LinksList uid={this.props.user._id} />
 									</List>
 								</div>
 								}
