@@ -38,7 +38,7 @@ const NewContacts = ({ jobs, classes }) => (
         <CardIcon Icon={PeopleIcon} bgColor="#4caf50" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
-            Contacts
+            Recent Contacts
             </Typography>
             <br></br>
             {jobs && jobs.map(job => (

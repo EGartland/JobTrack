@@ -216,7 +216,7 @@ class Contact extends Component {
 							<CustomTableCell>Company</CustomTableCell>
 							<CustomTableCell>Contact</CustomTableCell>
 							<CustomTableCell numeric>Phone Number</CustomTableCell>
-							<CustomTableCell numeric>E-Mail</CustomTableCell>
+							<CustomTableCell>E-Mail</CustomTableCell>
 							<CustomTableCell>Location</CustomTableCell>
 							{/* <CustomTableCell>Notes</CustomTableCell> */}
 						</TableRow>

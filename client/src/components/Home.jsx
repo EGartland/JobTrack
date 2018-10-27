@@ -76,7 +76,6 @@ import Applications from './Applications';
 import IntOut from './IntOut';
 import PendingInterviews from './PendingInterviews';
 import NewContacts from './NewContacts';
-// import Notes from './Notes';
 import API from '../utils/API';
 
 const styles = {
@@ -96,7 +95,7 @@ class Home extends Component {
 		let user = await API.getUser(this.props.uid)
 		console.log(this.props.uid);
 		// console.log(user);
-		// let interviews = user.job.filter(job => job.interview)
+		
 		if (user._id){
 		this.setState({ user })
 	}
@@ -117,10 +116,6 @@ class Home extends Component {
                                     <Welcome />
                                 </div>
                                 <div style={styles.singleCol}>
-                                    {/* <Notes
-                                        // orders={pendingOrders}
-                                        // customers={pendingOrdersCustomers}
-                                    /> */}
                                 </div>
                             </div>
                             <div style={styles.rightCol}>
