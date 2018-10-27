@@ -32,14 +32,14 @@ const Welcome = ({ classes, translate }) => (
             </Typography>
             <Typography component="p">
             The perfect place for job applicants everywhere! Here you can keep track of applications,
-            resumes, interviews, contacts, and appointments throughout the job finding proccess!
+            resumes, interviews, contacts, and appointments throughout the job finding process!
             </Typography>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-            <Button href="https://www.indeed.com/">
+            <Button target='_blank' href="https://www.indeed.com/">
                 Indeed  <HomeIcon style={{ paddingRight: '0.5em' }} />
             </Button>
-            <Button href="https://github.com/EGartland/JobTrack">
+            <Button target='_blank' href="https://github.com/EGartland/JobTrack">
                 GitHub  <CodeIcon style={{ paddingRight: '0.5em' }} />
             </Button>
         </CardActions>
