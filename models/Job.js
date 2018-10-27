@@ -48,7 +48,10 @@ const JobSchema = new Schema({
 	location: {
 		type: String,
 		// required: this.interview
-	}
+	},
+	contactName: {
+		type: String,
+	},
 })
 
 const Job = mongoose.model('Job', JobSchema)

@@ -45,56 +45,39 @@ const styles = theme => ({
     },
 });
 
+const convertedDate = (dateToConvert) => {
+    if (dateToConvert) 
+    {const date = dateToConvert.substring(0, 10).split('-')
+    const [ year, month, day ] = date
+    return `${month}/${day}/${year}`
+}
+}
+
 const PendingInterviews = ({
-    reviews = [],
-    customers = {},
-    nb,
-    translate,
+    jobs,
     classes,
 }) => (
     <div className={classes.main}>
         <CardIcon Icon={CalendarTodayIcon} bgColor="#f44336" />
         <Card className={classes.card}>
-            <Typography className={classes.title} color="textSecondary">
+        <Typography className={classes.title} color="textSecondary">
+            Interview Reminders
             </Typography>
-            <Typography
-                variant="headline"
-                component="h2"
-                className={classes.value}
-            >
-                {/* <Link to={location} className={classes.titleLink}>
-                    {nb}
-                </Link> */}
-            </Typography>
-            <Divider />
-            {/* <List>
-                {reviews.map(record => (
-                    <ListItem
-                        key={record.id}
-                        button
-                        component={Link}
-                        to={`/reviews/${record.id}`}
-                    >
-                        {customers[record.customer_id] ? (
-                            <Avatar
-                                src={`${
-                                    customers[record.customer_id].avatar
-                                }?size=32x32`}
-                                className={classes.avatar}
-                            />
-                        ) : (
-                            <Avatar />
-                        )}
-
-                        <ListItemText
-                            primary={<StarRatingField record={record} />}
-                            secondary={record.comment}
-                            className={classes.listItemText}
-                            style={{ paddingRight: 0 }}
-                        />
-                    </ListItem>
-                ))}
-            </List> */}
+            <br></br>
+        {jobs && jobs.map(job => (
+                <div>
+            {job.companyName && <Typography variant="title" component="h2">
+                {job.companyName}
+            </Typography>}
+            {job.interviewDate && <Typography variant="button" component="h4">
+                {convertedDate(job.interviewDate)}
+            </Typography>}
+            {job.location && <Typography variant="button" component="h2">
+                {job.location}
+            </Typography>}
+            < Divider />
+            </div>
+            ))}
         </Card>
     </div>
 );

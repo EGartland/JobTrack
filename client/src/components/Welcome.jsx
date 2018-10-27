@@ -36,11 +36,11 @@ const Welcome = ({ classes, translate }) => (
             </Typography>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-            <Button href="https://www.indeed.com/">
+            {/* <Button href="https://www.indeed.com/">
                 Indeed  <HomeIcon style={{ paddingRight: '0.5em' }} />
-            </Button>
+            </Button> */}
             <Button href="https://github.com/EGartland/JobTrack">
-                GitHub  <CodeIcon style={{ paddingRight: '0.5em' }} />
+                GitHub <CodeIcon style={{ paddingLeft: '0.2em' , paddingRight: '0em' }} />
             </Button>
         </CardActions>
     </Card>

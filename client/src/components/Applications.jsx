@@ -20,15 +20,16 @@ const styles = {
     },
 };
 
-const Applications = ({ value, translate, classes }) => (
+const Applications = ({ value, jobs, classes }) => (
     <div className={classes.main}>
         <CardIcon Icon={MenuIcon} bgColor="#31708f" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
+            Applications Out
             </Typography>
-            <Typography variant="headline" component="h2">
-                {value}
-            </Typography>
+            {jobs &&<Typography variant="headline" component="h2">
+                {jobs.length}
+            </Typography>}
         </Card>
     </div>
 );

@@ -74,9 +74,11 @@ class Interviews extends Component {
 		const { classes } = this.props;
 		// console.log(this.state)
 		const convertedDate = (dateToConvert) => {
-			const date = dateToConvert.substring(0, 10).split('-')
+			if (dateToConvert) 
+			{const date = dateToConvert.substring(0, 10).split('-')
 			const [ year, month, day ] = date
 			return `${month}/${day}/${year}`
+		}
 		}
 		const convertTime = t => {
 			if(t) {

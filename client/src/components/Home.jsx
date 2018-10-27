@@ -78,6 +78,7 @@ import IntOut from './IntOut';
 import PendingInterviews from './PendingInterviews';
 import NewContacts from './NewContacts';
 import Notes from './Notes';
+import API from '../utils/API';
 
 const styles = {
     flex: { display: 'flex' },
@@ -88,13 +89,21 @@ const styles = {
 };
 
 class Home extends Component {
+	
 	state = {
-		user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : {}
+		user: {}
 	}
-    componentDidMount() {}
-
-
+	async componentDidMount() {
+		let user = await API.getUser(this.props.uid)
+		console.log(this.props.uid);
+		// console.log(user);
+		// let interviews = user.job.filter(job => job.interview)
+		if (user._id){
+		this.setState({ user })
+	}
+	}
     render() {
+		console.log(this.state.user);
         return (
             <Fragment>
 					<br></br>
@@ -102,8 +111,8 @@ class Home extends Component {
                         <div style={styles.flex}>
                             <div style={styles.leftCol}>
                                 <div style={styles.flex}>
-                                    <Applications />
-                                    <IntOut />
+                                    {this.state.user.job &&<Applications jobs={this.state.user.job}/>}
+                                    {this.state.user.job && <IntOut jobs={this.state.user.job.filter(job => job.interview)}/>}
                                 </div>
                                 <div style={styles.singleCol}>
                                     <Welcome />
@@ -117,15 +126,9 @@ class Home extends Component {
                             </div>
                             <div style={styles.rightCol}>
                                 <div style={styles.flex}>
-                                    <PendingInterviews
-                                        // nb={nbPendingReviews}
-                                        // reviews={pendingReviews}
-                                        // customers={pendingReviewsCustomers}
-                                    />
-                                    <NewContacts
-                                        // nb={nbNewCustomers}
-                                        // visitors={newCustomers}
-                                    />
+								{this.state.user.job && <PendingInterviews jobs={this.state.user.job.filter(job => job.interview)}/>}
+                                    {this.state.user.job && <NewContacts jobs={this.state.user.job.filter(job => job.contactName && job.phone || job.companyName && job.phone)}
+                                    />}
                                 </div>
                             </div>
                         </div>

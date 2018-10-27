@@ -183,12 +183,12 @@ class Dashboard extends React.Component {
 								}
 						</Drawer>
 						<main className={classes.content}>
-							<Route exact path='/' component={Home} />
+							<Route exact path='/' component={() => <Home uid={this.props.user._id} />} />
 							<Route exact path='/job/:id' component={JobForm} />
 							<Route exact path='/addJob' component={JobForm} />
 							<Route exact path='/jobs' component={() => <Jobs uid={this.props.user._id} />} />
 							<Route exact path='/calendar' component={Calendar} />
-							<Route exact path='/contacts' component={Contact} />
+							<Route exact path='/contacts' component={() => <Contact uid={this.props.user._id} />} />
 							<Route exact path='/interviews' component={() => <Interviews uid={this.props.user._id} />} />
 						</main>
 					</div>

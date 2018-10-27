@@ -1,10 +1,6 @@
 import React from 'react';
 import compose from 'recompose/compose';
 import Card from '@material-ui/core/Card';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PeopleIcon from '@material-ui/icons/People';
@@ -27,51 +23,38 @@ const styles = theme => ({
     title: {
         padding: '0 16px',
     },
-    value: {
+    info: {
         padding: '0 16px',
         minHeight: 48,
     },
-    avatar: {
-        background: theme.palette.background.avatar,
-    },
-    listItemText: {
-        paddingRight: 0,
+
+   info: {
+        marginLeft: theme.spacing.unit,
     },
 });
 
-const NewContacts = ({ visitors = [], nb, translate, classes }) => (
+const NewContacts = ({ jobs, classes }) => (
     <div className={classes.main}>
         <CardIcon Icon={PeopleIcon} bgColor="#4caf50" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
+            Contacts
             </Typography>
-            <Typography
-                variant="headline"
-                component="h2"
-                className={classes.value}
-            >
-                {nb}
+            <br></br>
+            {jobs && jobs.map(job => (
+                <div>
+            {job.contactName && <Typography className={classes.info} variant="title" component="h2">
+                {job.contactName}
+            </Typography>}
+            {job.companyName && <Typography variant="button" component="h2">
+                {job.companyName}
+            </Typography>}
+            <Typography variant="button" component="h2">
+                {job.phone}
             </Typography>
-            <Divider />
-            <List>
-                {visitors.map(record => (
-                    <ListItem
-                        button
-                        to={`/customers/${record.id}`}
-                        component={Link}
-                        key={record.id}
-                    >
-                        <Avatar
-                            src={`${record.avatar}?size=32x32`}
-                            className={classes.avatar}
-                        />
-                        <ListItemText
-                            primary={`${record.first_name} ${record.last_name}`}
-                            className={classes.listItemText}
-                        />
-                    </ListItem>
-                ))}
-            </List>
+            < Divider />
+            </div>
+            ))}
         </Card>
     </div>
 );

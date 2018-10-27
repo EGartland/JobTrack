@@ -2,17 +2,13 @@
     width: 58%
 }
 
-#submitBtn {
+/* #submitBtn {
     background-color: #2296F2;
-}
+} */
 
 #paperStyle {
     padding: 20px;
     margin-top: 4rem;
     margin-bottom: 4rem;
     width: 75%;
-}
-
-#newJobTitle {
-    
 }

@@ -20,15 +20,16 @@ const styles = {
     },
 };
 
-const IntOut = ({ value, translate, classes }) => (
+const IntOut = ({ value, jobs, classes }) => (
     <div className={classes.main}>
         <CardIcon Icon={ChatIcon} bgColor="#ff9800" />
         <Card className={classes.card}>
             <Typography className={classes.title} color="textSecondary">
+            Interviews Granted
             </Typography>
-            <Typography variant="headline" component="h2">
-                {value}
-            </Typography>
+            {jobs &&<Typography variant="headline" component="h2">
+                {jobs.length}
+            </Typography>}
         </Card>
     </div>
 );

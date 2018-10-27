@@ -32,6 +32,7 @@ class JobForm extends React.Component {
 		interview: 'false',
 		phone: '',
 		email: '',
+		contactName: '',
 		appliedDate: currentDate(),
 		interviewDate: currentDate(),
 		interviewTime: '',
@@ -71,6 +72,7 @@ class JobForm extends React.Component {
 			interview: 'false',
 			phone: '',
 			email: '',
+			contactName: '',
 			appliedDate: currentDate(),
 			interviewDate: currentDate(),
 			interviewTime: '',
@@ -101,7 +103,7 @@ class JobForm extends React.Component {
 			jobTitleErr: false,
 			companyNameErr: false,
 		})
-		let { jobTitle, companyName, status, interview, phone, email, appliedDate, interviewDate, interviewTime, location } = this.state
+		let { jobTitle, companyName, status, interview, phone, email, contactName, appliedDate, interviewDate, interviewTime, location } = this.state
 		isNull(appliedDate) || appliedDate === '' ? this.setState({ appliedDate: new Date() }) : appliedDate
 		let hasContact = phone !== '' || email !== '' ? true : false
 		// console.log(phone, email, hasContact)
@@ -113,6 +115,7 @@ class JobForm extends React.Component {
 				interview,
 				phone,
 				email,
+				contactName,
 				appliedDate,
 				interviewDate,
 				interviewTime,
@@ -130,6 +133,7 @@ class JobForm extends React.Component {
 				interview,
 				phone,
 				email,
+				contactName,
 				appliedDate,
 				interviewDate,
 				interviewTime,
@@ -197,6 +201,16 @@ class JobForm extends React.Component {
 					/>
 					<br />
 					<br />
+					<br />
+					<TextField
+						label='Contact Name'
+						value={this.state.contactName}
+						name='contactName'
+						margin='normal'
+						onChange={this.handleChange}
+						// error={this.state.companyNameErr || this.state.jobTitle.length < 3}
+						fullWidth={true}
+					/>
 					<br />
 					<TextField
 						label='Contact Phone'
@@ -316,7 +330,7 @@ class JobForm extends React.Component {
 					<br></br>
 					{this.state.msg && this.state.msg !== '' && <p>{this.state.msg}</p>}
 					{this.state.error && <p>Error: {this.state.errMsg.join(' | ')}</p>}
-					<Button id='submitBtn' type='submit'>{this.state.update ? 'Update' : 'Submit'}</Button>
+					<Button id='submitBtn' type='submit' color='primary' variant='contained'>{this.state.update ? 'Update' : 'Submit'}</Button>
 				</form>
 			</div>
 			</Paper>
