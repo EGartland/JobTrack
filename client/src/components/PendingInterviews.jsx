@@ -33,15 +33,9 @@ const styles = theme => ({
         padding: '0 16px',
         minHeight: 48,
     },
-    avatar: {
-        background: theme.palette.background.avatar,
-    },
-    listItemText: {
-        overflowY: 'hidden',
-        height: '4em',
-        display: '-webkit-box',
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
+    info: {
+        padding: '0 16px',
+        // minHeight: 48,
     },
 });
 
@@ -66,13 +60,13 @@ const PendingInterviews = ({
             <br></br>
         {jobs && jobs.map(job => (
                 <div>
-            {job.companyName && <Typography variant="title" component="h2">
+            {job.companyName && <Typography className={classes.info} variant="title" color="primary" component="info" paddingRight='0.5em'>
                 {job.companyName}
             </Typography>}
-            {job.interviewDate && <Typography variant="button" component="h4">
+            {job.interviewDate && <Typography className={classes.info} variant="button" component="info" paddingRight='0.5em'>
                 {convertedDate(job.interviewDate)}
             </Typography>}
-            {job.location && <Typography variant="button" component="h2">
+            {job.location && <Typography className={classes.info} variant="button" component="info" paddingRight='0.5em'>
                 {job.location}
             </Typography>}
             < Divider />

@@ -92,7 +92,7 @@ class Jobs extends Component {
 						<Typography>Contact Name: {job.contactName}</Typography>
 						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
 						<Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" className={classes.button}>Update</Button></Link>
-						 <Button variant="contained" color="primary" className={classes.button} onClick={() => this.handleDelete(job._id)}>Delete</Button></Card>)}
+						 <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.handleDelete(job._id)}>Delete</Button></Card>)}
 					</ul>
 				}
 			</div>

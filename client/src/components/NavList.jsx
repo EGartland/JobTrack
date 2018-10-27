@@ -52,14 +52,14 @@ const NavList = () => (
 				<ListItemText primary="Contacts" />
 			</ListItem>
 		</Link>
-		<Link to='/calendar' style={{ textDecoration: 'none' }}>
+		{/* <Link to='/calendar' style={{ textDecoration: 'none' }}>
 			<ListItem button>
 				<ListItemIcon>
 					<CalendarTodayIcon />
 				</ListItemIcon>
 				<ListItemText primary="Resources" />
 			</ListItem>
-		</Link>
+		</Link> */}
 	</div>
 );
 

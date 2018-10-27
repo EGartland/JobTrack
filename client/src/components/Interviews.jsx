@@ -109,7 +109,7 @@ class Interviews extends Component {
 						<TableRow>
 							<CustomTableCell></CustomTableCell>
 							<CustomTableCell>Company Name</CustomTableCell>
-							<CustomTableCell numeric>Interview #</CustomTableCell>
+							<CustomTableCell >Interviewer</CustomTableCell>
 							<CustomTableCell numeric>Time</CustomTableCell>
 							<CustomTableCell numeric>Date</CustomTableCell>
 							<CustomTableCell>Location</CustomTableCell>
@@ -123,7 +123,7 @@ class Interviews extends Component {
 								<CustomTableCell component="th" scope="row">
 									{job.companyName}
 								</CustomTableCell>
-								<CustomTableCell numeric>{i + 1}</CustomTableCell>
+								<CustomTableCell >{(job.contactName)}</CustomTableCell>
 								<CustomTableCell numeric>{convertTime(job.interviewTime)}</CustomTableCell>
 								<CustomTableCell numeric>{convertedDate(job.interviewDate)}</CustomTableCell>
 								<CustomTableCell>{job.location}</CustomTableCell>

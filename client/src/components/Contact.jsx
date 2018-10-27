@@ -213,10 +213,10 @@ class Contact extends Component {
 					<TableHead>
 						<TableRow>
 							<CustomTableCell></CustomTableCell>
-							<CustomTableCell>Company Name</CustomTableCell>
-							<CustomTableCell numeric>Interview #</CustomTableCell>
-							<CustomTableCell numeric>Time</CustomTableCell>
-							<CustomTableCell numeric>Date</CustomTableCell>
+							<CustomTableCell>Company</CustomTableCell>
+							<CustomTableCell>Contact</CustomTableCell>
+							<CustomTableCell numeric>Phone Number</CustomTableCell>
+							<CustomTableCell numeric>E-Mail</CustomTableCell>
 							<CustomTableCell>Location</CustomTableCell>
 							{/* <CustomTableCell>Notes</CustomTableCell> */}
 						</TableRow>
@@ -228,9 +228,9 @@ class Contact extends Component {
 								<CustomTableCell component="th" scope="row">
 									{job.companyName}
 								</CustomTableCell>
-								<CustomTableCell numeric>{i + 1}</CustomTableCell>
+								<CustomTableCell>{(job.contactName)}</CustomTableCell>
 								<CustomTableCell numeric>{(job.phone)}</CustomTableCell>
-								<CustomTableCell numeric>{(job.email)}</CustomTableCell>
+								<CustomTableCell>{(job.email)}</CustomTableCell>
 								<CustomTableCell>{job.location}</CustomTableCell>
 								{/* <CustomTableCell>{job.notes}</CustomTableCell> */}
 							</TableRow>

@@ -27,7 +27,7 @@ const IntOut = ({ value, jobs, classes }) => (
             <Typography className={classes.title} color="textSecondary">
             Interviews Granted
             </Typography>
-            {jobs &&<Typography variant="headline" component="h2">
+            {jobs &&<Typography variant="headline" color="primary" component="h2">
                 {jobs.length}
             </Typography>}
         </Card>

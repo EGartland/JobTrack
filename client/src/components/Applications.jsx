@@ -27,7 +27,7 @@ const Applications = ({ value, jobs, classes }) => (
             <Typography className={classes.title} color="textSecondary">
             Applications Out
             </Typography>
-            {jobs &&<Typography variant="headline" component="h2">
+            {jobs &&<Typography variant="headline" color="primary" component="h2">
                 {jobs.length}
             </Typography>}
         </Card>

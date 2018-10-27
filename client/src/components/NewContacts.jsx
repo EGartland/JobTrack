@@ -29,7 +29,7 @@ const styles = theme => ({
     },
 
    info: {
-        marginLeft: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
     },
 });
 
@@ -43,13 +43,13 @@ const NewContacts = ({ jobs, classes }) => (
             <br></br>
             {jobs && jobs.map(job => (
                 <div>
-            {job.contactName && <Typography className={classes.info} variant="title" component="h2">
+            {job.contactName && <Typography className={classes.info} color='primary' variant="title" component="info" paddingRight='0.5em'>
                 {job.contactName}
             </Typography>}
-            {job.companyName && <Typography variant="button" component="h2">
+            {job.companyName && <Typography className={classes.info} variant="button" component="info" paddingRight='0.5em'>
                 {job.companyName}
             </Typography>}
-            <Typography variant="button" component="h2">
+            <Typography className={classes.info} variant="button" component="info" paddingRight='0.5em'>
                 {job.phone}
             </Typography>
             < Divider />

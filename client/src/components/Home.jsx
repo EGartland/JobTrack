@@ -74,10 +74,9 @@ import React, { Component, Fragment } from 'react';
 import Welcome from './Welcome';
 import Applications from './Applications';
 import IntOut from './IntOut';
-// import PendingOrders from './PendingOrders';
 import PendingInterviews from './PendingInterviews';
 import NewContacts from './NewContacts';
-import Notes from './Notes';
+// import Notes from './Notes';
 import API from '../utils/API';
 
 const styles = {
@@ -118,10 +117,10 @@ class Home extends Component {
                                     <Welcome />
                                 </div>
                                 <div style={styles.singleCol}>
-                                    <Notes
+                                    {/* <Notes
                                         // orders={pendingOrders}
                                         // customers={pendingOrdersCustomers}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                             <div style={styles.rightCol}>
