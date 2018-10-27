@@ -85,12 +85,13 @@ class Jobs extends Component {
 				{this.state.jobs.length > 0 && 
 					<ul>
 						{this.state.jobs.map(job => <Card id='card' key={job._id}>
-						<Typography>Position: {job.jobTitle}</Typography> 
-						<Typography>Company: {job.companyName}</Typography>
+						<Typography variant='button' color='primary'>{job.jobTitle}</Typography> 
+						<Typography variant='button' color='primary'>{job.companyName}</Typography>
 						<Typography>Status: {job.status}</Typography>
-						<Typography>Company Contact: {job.phone}</Typography>
-						<Typography>Contact Name: {job.contactName}</Typography>
 						<Typography>Date Applied: {convertedDate(job.appliedDate)}</Typography>
+						<Typography variant='button' color='secondary'>Contact</Typography>
+						<Typography>{job.contactName}</Typography>
+						<Typography>{job.phone}</Typography>
 						<Link to={`/job/${job._id}`} style={{ textDecoration: 'none' }}><Button variant="contained" color="primary" className={classes.button}>Update</Button></Link>
 						 <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.handleDelete(job._id)}>Delete</Button></Card>)}
 					</ul>
