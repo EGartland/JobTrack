@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import NotificationImportant from '@material-ui/icons/NotificationImportant';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ const PendingInterviews = ({
     classes,
 }) => (
     <div className={classes.main}>
-        <CardIcon Icon={CalendarTodayIcon} bgColor="#f44336" />
+        <CardIcon Icon={NotificationImportant} bgColor="#f44336" />
         <Card className={classes.card}>
         <Typography className={classes.title} color="textSecondary">
             Interview Reminders
